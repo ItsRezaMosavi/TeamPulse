@@ -1,15 +1,23 @@
-﻿namespace BuildingBlocks.Pagination;
+﻿using BuildingBlocks.Pagination.Policies;
+using BuildingBlocks.Validation.Extensions;
+
+namespace BuildingBlocks.Pagination;
 
 public sealed class PageRequest
 {
-    private const int MaxPageSize = 100;
-    private const int DefaultPageSize = 10;
-    private const int DefaultPage = 1;
-    
-    public PageRequest(int page = DefaultPage, int pageSize = DefaultPageSize)
+    public const int DefaultPageSize = 10;
+    public const int DefaultMaxPageSize = 100;
+
+    private PageRequest(int page, int pageSize)
     {
-        Page = page > 0 ? page : DefaultPage;
-        PageSize = pageSize <= 0 ? DefaultPageSize : Math.Min(pageSize, MaxPageSize);
+        Page = page;
+        PageSize = pageSize;
+    }
+
+    public static PageRequest Create(int page, int pageSize = DefaultPageSize, int maxPageSize = DefaultMaxPageSize)
+    {
+        PageRequestPolicy.Create(page, pageSize, maxPageSize).Evaluate().Throw();
+        return new PageRequest(page, pageSize);
     }
 
     public int Page { get; }

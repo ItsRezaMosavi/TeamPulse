@@ -2,6 +2,8 @@
 
 public sealed class DomainPolicy
 {
+    private readonly IDomainRule[] _rules;
+
     public DomainPolicy(params IDomainRule[] rules)
     {
         ArgumentNullException.ThrowIfNull(rules);
@@ -12,14 +14,20 @@ public sealed class DomainPolicy
         foreach (var rule in rules)
             ArgumentNullException.ThrowIfNull(rule);
 
-        Rules = rules.ToArray();
+        _rules = rules;
     }
-
-    public IReadOnlyCollection<IDomainRule> Rules { get; init; }
 
 
     public IReadOnlyCollection<Clause> Evaluate()
     {
-        return Rules.Select(x => x.Evaluate()).Where(x => x.IsInvalid).ToList().AsReadOnly();
+        var clauses = new List<Clause>();
+        foreach (var rule in _rules)
+        {
+            var clause = rule.Evaluate();
+            if (clause.IsInvalid)
+                clauses.Add(clause);
+        }
+
+        return clauses.AsReadOnly();
     }
 }
