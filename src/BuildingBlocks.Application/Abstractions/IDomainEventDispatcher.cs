@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Domain.Events;
 
-namespace BuildingBlocks.Application;
+namespace BuildingBlocks.Application.Abstractions;
 
 public interface IDomainEventDispatcher
 {

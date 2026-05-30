@@ -1,6 +1,6 @@
 ﻿namespace BuildingBlocks.Domain.Aggregates;
 
-public class AggregateRoot : AggregateRoot<Guid>
+public abstract class AggregateRoot : AggregateRoot<Guid>
 {
     
 }

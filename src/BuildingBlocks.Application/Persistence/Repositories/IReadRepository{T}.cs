@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using BuildingBlocks.Domain.Aggregates;
 
-namespace BuildingBlocks.Application.Repositories;
+namespace BuildingBlocks.Application.Persistence.Repositories;
 
 public interface IReadRepository<TAggregate, in TId> where TAggregate : AggregateRoot<TId>
 {
