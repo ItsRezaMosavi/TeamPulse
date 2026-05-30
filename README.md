@@ -56,7 +56,7 @@ Result pattern for functional error handling:
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/ItsRezaMosavi/TeamPulse.git
 cd TeamPulse
 ```
 
