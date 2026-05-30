@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 
-namespace BuildingBlocks.Domain.Repositories;
+namespace BuildingBlocks.Application.Repositories;
 
 public interface IRepository<TAggregate, in TId> where TAggregate : AggregateRoot<TId>
 {
