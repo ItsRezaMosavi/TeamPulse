@@ -2,14 +2,14 @@
 
 internal static class DefaultMessage
 {
-    internal const string Failure = "خطای سرور";
-    internal const string Validation = "خطای اعتبارسنجی";
-    internal const string NotFound = "منبع درخواستی یافت نشد";
-    internal const string Conflict = "تداخل در داده‌ها";
-    internal const string Unauthorized = "دسترسی غیرمجاز";
-    internal const string Forbidden = "عدم دسترسی به این منبع";
-    internal const string BusinessRule = "نقض قوانین کسب‌وکار";
-    internal const string TooManyRequests = "تعداد درخواست‌ها بیش از حد مجاز";
-    internal const string Unavailable = "سرویس در دسترس نیست";
-    internal const string Timeout = "زمان درخواست به پایان رسید";
+    internal const string Failure = "Server failure";
+    internal const string Validation = "Validation error";
+    internal const string NotFound = "Requested resource not found";
+    internal const string Conflict = "Data conflict";
+    internal const string Unauthorized = "Unauthorized access";
+    internal const string Forbidden = "Access denied to this resource";
+    internal const string BusinessRule = "Business rule violation";
+    internal const string TooManyRequests = "Too many requests";
+    internal const string Unavailable = "Service unavailable";
+    internal const string Timeout = "Request timeout";
 }

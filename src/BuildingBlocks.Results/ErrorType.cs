@@ -3,7 +3,7 @@
 public enum ErrorType
 {
     /// <summary>
-    /// خطای عمومی و ناشناخته
+    /// General and unknown error
     /// </summary>
     Failure,
     Validation,
@@ -13,13 +13,13 @@ public enum ErrorType
     Forbidden,
 
     /// <summary>
-    /// نقض قوانین بیزینسی / Domain Rule
+    /// Business rule / Domain rule violation
     /// </summary>
     BusinessRule,
     TooManyRequests,
 
     /// <summary>
-    /// سرویس یا منبع در دسترس نیست
+    /// Service or resource unavailable
     /// </summary>
     Unavailable,
     Timeout
