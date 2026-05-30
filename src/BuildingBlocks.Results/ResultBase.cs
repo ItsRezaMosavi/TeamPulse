@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Results.Contracts;
+﻿namespace BuildingBlocks.Results;
 
 public abstract class ResultBase
 {

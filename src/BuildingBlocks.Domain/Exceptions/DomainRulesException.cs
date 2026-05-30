@@ -1,4 +1,6 @@
-﻿namespace BuildingBlocks.Validation.Exceptions;
+﻿using BuildingBlocks.Domain.Rules;
+
+namespace BuildingBlocks.Domain.Exceptions;
 
 public sealed class DomainRulesException : Exception
 {

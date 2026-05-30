@@ -1,12 +1,13 @@
-﻿using BuildingBlocks.Pagination.DomainRules;
-using BuildingBlocks.Validation;
+﻿using BuildingBlocks.Domain.Rules;
+using BuildingBlocks.Pagination.Rules;
 
 namespace BuildingBlocks.Pagination.Policies;
 
-public sealed class PageRequestPolicy : ValidationPolicy
+public sealed class PageRequestPolicy
 {
-    private PageRequestPolicy(IEnumerable<IDomainRule> rules) : base(rules)
+    private PageRequestPolicy(IEnumerable<IDomainRule> rules)
     {
+        _policy = new DomainPolicy(rules.ToArray());
     }
 
     public static PageRequestPolicy Create(int page, int pageSize, int maxPageSize)
@@ -20,4 +21,9 @@ public sealed class PageRequestPolicy : ValidationPolicy
         };
         return new PageRequestPolicy(rules);
     }
+
+    private readonly DomainPolicy _policy;
+    
+    public IReadOnlyCollection<Clause> Evaluate() => _policy.Evaluate();
+
 }

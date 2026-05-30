@@ -1,7 +1,7 @@
-﻿using BuildingBlocks.Pagination.Resources;
-using BuildingBlocks.Validation;
+﻿using BuildingBlocks.Domain.Rules;
+using BuildingBlocks.Pagination.Resources;
 
-namespace BuildingBlocks.Pagination.DomainRules;
+namespace BuildingBlocks.Pagination.Rules;
 
 public sealed class ItemsCannotBeNullRule<T>(IReadOnlyList<T>? items) : IDomainRule
 {

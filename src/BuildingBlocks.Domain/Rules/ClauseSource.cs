@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Validation;
+﻿namespace BuildingBlocks.Domain.Rules;
 
 public readonly struct ClauseSource
 {

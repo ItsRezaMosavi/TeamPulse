@@ -1,5 +1,5 @@
-﻿using BuildingBlocks.Pagination.Policies;
-using BuildingBlocks.Validation.Extensions;
+﻿using BuildingBlocks.Domain.Rules;
+using BuildingBlocks.Pagination.Policies;
 
 namespace BuildingBlocks.Pagination;
 
@@ -15,7 +15,7 @@ public sealed class PagedResult<T>
 
     public static PagedResult<T> Create(IReadOnlyList<T> items, PageRequest pageRequest, long totalCount)
     {
-        PagedResultPolicy<T>.Create(items, pageRequest, totalCount).Evaluate().Throw();
+        PagedResultPolicy<T>.Create(items, pageRequest, totalCount).Evaluate().ThrowIfBroken();
         return new(items, pageRequest, totalCount);
     }
 

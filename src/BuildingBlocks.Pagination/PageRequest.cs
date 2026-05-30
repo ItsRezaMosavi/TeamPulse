@@ -1,5 +1,5 @@
-﻿using BuildingBlocks.Pagination.Policies;
-using BuildingBlocks.Validation.Extensions;
+﻿using BuildingBlocks.Domain.Rules;
+using BuildingBlocks.Pagination.Policies;
 
 namespace BuildingBlocks.Pagination;
 
@@ -16,7 +16,7 @@ public sealed class PageRequest
 
     public static PageRequest Create(int page, int pageSize = DefaultPageSize, int maxPageSize = DefaultMaxPageSize)
     {
-        PageRequestPolicy.Create(page, pageSize, maxPageSize).Evaluate().Throw();
+        PageRequestPolicy.Create(page, pageSize, maxPageSize).Evaluate().ThrowIfBroken();
         return new PageRequest(page, pageSize);
     }
 

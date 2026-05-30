@@ -1,10 +1,10 @@
-﻿using BuildingBlocks.Validation.Exceptions;
+﻿using BuildingBlocks.Domain.Exceptions;
 
-namespace BuildingBlocks.Validation.Extensions;
+namespace BuildingBlocks.Domain.Rules;
 
 public static class ClauseCollectionExtensions
 {
-    public static void Throw(this IEnumerable<Clause> clauses)
+    public static void ThrowIfBroken(this IEnumerable<Clause> clauses)
     {
         ArgumentNullException.ThrowIfNull(clauses);
 

@@ -1,7 +1,7 @@
-﻿using BuildingBlocks.Pagination.Resources;
-using BuildingBlocks.Validation;
+﻿using BuildingBlocks.Domain.Rules;
+using BuildingBlocks.Pagination.Resources;
 
-namespace BuildingBlocks.Pagination.DomainRules;
+namespace BuildingBlocks.Pagination.Rules;
 
 public sealed class PageMustBeGreaterThanZeroRule(int page) : IDomainRule
 {
@@ -11,7 +11,7 @@ public sealed class PageMustBeGreaterThanZeroRule(int page) : IDomainRule
     {
         if (page > 0)
             return Clause.Valid();
-        
+
         return Clause.Invalid(ErrorMessages.PageMustBeGreaterThanZero, (nameof(PageRequest.Page), page));
     }
 }

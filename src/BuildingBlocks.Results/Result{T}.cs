@@ -1,6 +1,4 @@
-﻿using BuildingBlocks.Results.Contracts;
-
-namespace BuildingBlocks.Results;
+﻿namespace BuildingBlocks.Results;
 
 public sealed class Result<T> : ResultBase
 {
