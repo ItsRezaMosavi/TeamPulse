@@ -5,10 +5,10 @@ namespace BuildingBlocks.Application.Repositories;
 
 public interface IReadRepository<TAggregate, in TId> where TAggregate : AggregateRoot<TId>
 {
-    Task<IReadOnlyList<TAggregate>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<TAggregate?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyList<TAggregate>> FindAsync(Expression<Func<TAggregate, bool>> predicate,
-                                              CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<TAggregate>> GetAsync(Expression<Func<TAggregate, bool>>? predicate = null,
+                                             CancellationToken cancellationToken = default);
 
     Task<TAggregate?> SingleOrDefaultAsync(Expression<Func<TAggregate, bool>> predicate,
                                            CancellationToken cancellationToken = default);
