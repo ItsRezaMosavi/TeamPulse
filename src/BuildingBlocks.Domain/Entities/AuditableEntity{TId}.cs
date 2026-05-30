@@ -6,8 +6,6 @@ public abstract class AuditableEntity<TId, TUserId> : Entity<TId>
     public TUserId? CreatedBy { get; protected set; }
     public DateTime? UpdatedAt { get; protected set; }
     public TUserId? UpdatedBy { get; protected set; }
-    public DateTime? DeletedAt { get; protected set; }
-    public TUserId? DeletedBy { get; protected set; }
 
     public Guid? DeleteCommandCorrelationId { get; protected set; }
     public Guid? InsertCommandCorrelationId { get; protected set; }

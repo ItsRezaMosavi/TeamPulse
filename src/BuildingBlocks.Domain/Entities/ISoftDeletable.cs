@@ -1,7 +1,10 @@
 ﻿namespace BuildingBlocks.Domain.Entities;
 
-public interface ISoftDeletable
+public interface ISoftDeletable<TUserId>
 {
+    
+    public DateTime? DeletedAt { get; protected set; }
+    public TUserId? DeletedBy { get; protected set; }
     bool IsDeleted { get; protected set; }
 
     virtual void Delete()
