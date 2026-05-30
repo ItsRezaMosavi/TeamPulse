@@ -13,7 +13,8 @@ public static class ClauseCollectionExtensions
         foreach (var clause in array)
             ArgumentNullException.ThrowIfNull(clause);
 
-        if (array.Length > 0)
-            throw new DomainRulesException(array);
+        var invalidClauses = array.Where(c => c.IsInvalid).ToArray();
+        if (invalidClauses.Length > 0)
+            throw new DomainRulesException(invalidClauses);
     }
 }
