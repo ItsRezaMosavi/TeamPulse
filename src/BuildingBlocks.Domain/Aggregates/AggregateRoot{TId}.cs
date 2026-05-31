@@ -19,12 +19,12 @@ namespace BuildingBlocks.Domain.Aggregates;
 /// <item><description>Provides methods to add and clear domain events</description></item>
 /// </list>
 /// </remarks>
-public abstract class AggregateRoot<TId> : Entity<TId>
+public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvents
 {
     /// <summary>
     /// The internal collection of domain events.
     /// </summary>
-    private readonly List<IDomainEvent> _domainEvents = new();
+    private readonly List<IDomainEvent> _domainEvents = [];
 
     /// <summary>
     /// Gets the read-only collection of domain events that have been raised on this aggregate.
