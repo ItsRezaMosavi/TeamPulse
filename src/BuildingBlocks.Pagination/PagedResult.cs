@@ -1,6 +1,3 @@
-using BuildingBlocks.Domain.Rules;
-using BuildingBlocks.Pagination.Policies;
-
 namespace BuildingBlocks.Pagination;
 
 /// <summary>
@@ -35,7 +32,7 @@ public sealed class PagedResult<T>
     /// <param name="pageRequest">The page request that produced this result.</param>
     /// <param name="totalCount">The total number of items across all pages.</param>
     /// <returns>A validated <see cref="PagedResult{T}"/> instance.</returns>
-    /// <exception cref="DomainRulesException">Thrown when validation rules are broken.</exception>
+    /// <exception>Thrown when validation rules are broken.</exception>
     /// <remarks>
     /// This method validates that:
     /// <list type="bullet">
@@ -47,30 +44,33 @@ public sealed class PagedResult<T>
     /// </remarks>
     public static PagedResult<T> Create(IReadOnlyList<T> items, PageRequest pageRequest, long totalCount)
     {
-        PagedResultPolicy<T>.Create(items, pageRequest, totalCount).Evaluate().ThrowIfBroken();
-        return new(items, pageRequest, totalCount);
+        ArgumentNullException.ThrowIfNull(items);
+        ArgumentNullException.ThrowIfNull(pageRequest);
+        ArgumentOutOfRangeException.ThrowIfNegative(totalCount);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(items.Count, pageRequest.PageSize);
+        return new PagedResult<T>(items, pageRequest, totalCount);
     }
 
     /// <summary>
     /// Gets the collection of items for the current page.
     /// </summary>
     public IReadOnlyList<T> Items { get; }
-    
+
     /// <summary>
     /// Gets the current page number (1-based index).
     /// </summary>
     public int Page { get; }
-    
+
     /// <summary>
     /// Gets the number of items per page.
     /// </summary>
     public int PageSize { get; }
-    
+
     /// <summary>
     /// Gets the total number of items across all pages.
     /// </summary>
     public long TotalCount { get; }
-    
+
     /// <summary>
     /// Gets the total number of pages based on the page size and total count.
     /// </summary>
@@ -80,19 +80,19 @@ public sealed class PagedResult<T>
     /// For example, 95 items with page size 10 results in 10 total pages.
     /// </remarks>
     public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
-    
+
     /// <summary>
     /// Gets a value indicating whether there is a next page available.
     /// </summary>
     /// <value><c>true</c> if the current page is less than the total pages; otherwise, <c>false</c>.</value>
     public bool HasNextPage => Page < TotalPages;
-    
+
     /// <summary>
     /// Gets a value indicating whether there is a previous page available.
     /// </summary>
     /// <value><c>true</c> if the current page is greater than 1; otherwise, <c>false</c>.</value>
     public bool HasPreviousPage => Page > 1;
-    
+
     /// <summary>
     /// Gets a value indicating whether the result contains no items.
     /// </summary>

@@ -1,6 +1,3 @@
-using BuildingBlocks.Domain.Rules;
-using BuildingBlocks.Pagination.Policies;
-
 namespace BuildingBlocks.Pagination;
 
 /// <summary>
@@ -16,12 +13,12 @@ public sealed class PageRequest
     /// The default number of items per page if not specified.
     /// </summary>
     public const int DefaultPageSize = 10;
-    
+
     /// <summary>
     /// The maximum allowed page size to prevent excessive data retrieval in a single request.
     /// </summary>
     public const int DefaultMaxPageSize = 100;
-    
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PageRequest"/> class.
     /// </summary>
@@ -40,19 +37,22 @@ public sealed class PageRequest
     /// <param name="pageSize">The number of items per page (defaults to <see cref="DefaultPageSize"/>).</param>
     /// <param name="maxPageSize">The maximum allowed page size (defaults to <see cref="DefaultMaxPageSize"/>).</param>
     /// <returns>A validated <see cref="PageRequest"/> instance.</returns>
-    /// <exception cref="DomainRulesException">Thrown when validation rules are broken.</exception>
+    /// <exception>Thrown when validation rules are broken.</exception>
     /// <remarks>
     /// This method validates that:
     /// <list type="bullet">
     /// <item><description>Page number is greater than zero</description></item>
     /// <item><description>Page size is greater than zero</description></item>
     /// <item><description>Page size does not exceed the maximum allowed</description></item>
-    /// <item><description>Maximum page size is greater than zero</description></item>
+    /// <item><description>Maximum page size must be greater than zero</description></item>
     /// </list>
     /// </remarks>
     public static PageRequest Create(int page, int pageSize = DefaultPageSize, int maxPageSize = DefaultMaxPageSize)
     {
-        PageRequestPolicy.Create(page, pageSize, maxPageSize).Evaluate().ThrowIfBroken();
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(page);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(pageSize);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(maxPageSize);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(pageSize, maxPageSize);
         return new PageRequest(page, pageSize);
     }
 
@@ -60,7 +60,7 @@ public sealed class PageRequest
     /// Gets the page number to retrieve (1-based index).
     /// </summary>
     public int Page { get; }
-    
+
     /// <summary>
     /// Gets the number of items per page.
     /// </summary>
