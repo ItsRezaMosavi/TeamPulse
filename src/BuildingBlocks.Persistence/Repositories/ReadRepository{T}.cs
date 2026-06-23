@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
 using BuildingBlocks.Application.Persistence.Repositories;
 using BuildingBlocks.Domain.Aggregates;
+using BuildingBlocks.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace BuildingBlocks.Infrastructure.Persistence.Repositories;
+namespace BuildingBlocks.Persistence.Repositories;
 
 public class ReadRepository<TAggregate, TId>(ApplicationDbContext dbContext)
     : IReadRepository<TAggregate, TId> where TAggregate : AggregateRoot<TId>

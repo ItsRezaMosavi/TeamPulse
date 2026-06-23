@@ -1,8 +1,9 @@
 ﻿using BuildingBlocks.Application.Abstractions;
 using BuildingBlocks.Application.Persistence;
 using BuildingBlocks.Domain.Events;
+using BuildingBlocks.Persistence.DbContexts;
 
-namespace BuildingBlocks.Infrastructure.Persistence;
+namespace BuildingBlocks.Persistence;
 
 public sealed class UnitOfWork(ApplicationDbContext dbContext, IDomainEventDispatcher domainEventDispatcher)
     : IUnitOfWork
