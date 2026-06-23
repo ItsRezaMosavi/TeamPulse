@@ -1,5 +1,7 @@
 using BuildingBlocks.Domain.Entities;
 using BuildingBlocks.Domain.Events;
+using BuildingBlocks.Domain.Exceptions;
+using BuildingBlocks.Domain.Rules;
 
 namespace BuildingBlocks.Domain.Aggregates;
 
@@ -21,6 +23,19 @@ namespace BuildingBlocks.Domain.Aggregates;
 /// </remarks>
 public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvents
 {
+    protected static void CheckRule(IDomainRule rule)
+    {
+        if (rule.IsBroken())
+            throw new DomainRuleException(rule);
+    }
+
+    protected static void CheckRules(params IDomainRule[] rules)
+    {
+        foreach (var rule in rules)
+            CheckRule(rule);
+    }
+
+
     /// <summary>
     /// The internal collection of domain events.
     /// </summary>

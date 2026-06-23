@@ -3,5 +3,6 @@
 public interface IDomainRule
 {
     string Code { get; }
-    Clause Evaluate();
+    string Message { get; }
+    bool IsBroken();
 }
