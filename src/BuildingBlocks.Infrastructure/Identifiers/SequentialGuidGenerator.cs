@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Application.Abstractions;
 
-namespace BuildingBlocks.Infrastructure;
+namespace BuildingBlocks.Infrastructure.Identifiers;
 
 public sealed class SequentialGuidGenerator : IGuidGenerator
 {
