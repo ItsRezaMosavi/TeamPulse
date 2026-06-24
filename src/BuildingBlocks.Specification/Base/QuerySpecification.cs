@@ -5,7 +5,7 @@ namespace BuildingBlocks.Specification.Base;
 
 public class QuerySpecification<T> : IQuerySpecification<T>
 {
-    private readonly List<Expression<Func<T, object>>> _includes;
+    private readonly List<Expression<Func<T, object>>> _includes = [];
 
     protected QuerySpecification()
     {
@@ -17,8 +17,7 @@ public class QuerySpecification<T> : IQuerySpecification<T>
     public bool IsAscending { get; protected set; }
 
     public IReadOnlyList<Expression<Func<T, object>>> Includes => _includes;
-
-    public List<Expression<Func<T, object>>> Include { get; } = [];
+    
     public int Skip { get; protected set; }
     public int Take { get; protected set; }
     public bool IsPagingEnabled { get; protected set; }
@@ -26,6 +25,10 @@ public class QuerySpecification<T> : IQuerySpecification<T>
 
     protected void ApplyPaging(int skip, int take)
     {
+        ArgumentOutOfRangeException.ThrowIfLessThan(skip, 0);
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(take, 0);
+        
+        
         Skip = skip;
         Take = take;
         IsPagingEnabled = true;
