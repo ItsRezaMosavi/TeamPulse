@@ -25,7 +25,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore BuildingBlocks.sln
+        run: dotnet restore BuildingBlocks.sln --verbosity detailed
 
       - name: Build
         run: dotnet build BuildingBlocks.sln --configuration Release --no-restore
