@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using BuildingBlocks.Domain.Aggregates;
+﻿using BuildingBlocks.Domain.Aggregates;
+using BuildingBlocks.Specification.Contracts;
 
 namespace BuildingBlocks.Application.Persistence.Repositories;
 
@@ -7,20 +7,20 @@ public interface IReadRepository<TAggregate, in TId> where TAggregate : Aggregat
 {
     Task<TAggregate?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyList<TAggregate>> GetAsync(Expression<Func<TAggregate, bool>>? predicate = null,
+    Task<IReadOnlyList<TAggregate>> GetAsync(IQuerySpecification<TAggregate>? specification = null,
                                              CancellationToken cancellationToken = default);
 
-    Task<TAggregate?> SingleOrDefaultAsync(Expression<Func<TAggregate, bool>> predicate,
+    Task<TAggregate?> SingleOrDefaultAsync(IQuerySpecification<TAggregate> specification,
                                            CancellationToken cancellationToken = default);
 
-    Task<TAggregate?> FirstOrDefaultAsync(Expression<Func<TAggregate, bool>> predicate,
+    Task<TAggregate?> FirstOrDefaultAsync(IQuerySpecification<TAggregate> specification,
                                           CancellationToken cancellationToken = default);
 
-    Task<bool> AnyAsync(Expression<Func<TAggregate, bool>> predicate,
+    Task<bool> AnyAsync(IQuerySpecification<TAggregate> specification,
                         CancellationToken cancellationToken = default);
 
     Task<bool> ExistsAsync(TId id, CancellationToken cancellationToken = default);
 
-    Task<int> CountAsync(Expression<Func<TAggregate, bool>>? predicate = null,
+    Task<int> CountAsync(IQuerySpecification<TAggregate>? specification = null,
                          CancellationToken cancellationToken = default);
 }
