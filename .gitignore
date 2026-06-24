@@ -1,71 +1,41 @@
 ```
-# Build artifacts
-*.dll
-*.exe
-*.pdb
-*.so
-*.dylib
+# Compiled and build artifacts
 *.o
 *.obj
+*.exe
+*.dll
+*.so
 *.a
-*.lib
 *.out
 
 # Dependencies
-packages/
-node_modules/
-.nuget/
-.nuget.packages/
-
-# Output directories
 bin/
 obj/
-out/
-dist/
-build/
-target/
+packages/
+.nuget/
+project.lock.json
 
-# IDE files
-.vs/
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
 .vscode/
 .idea/
-*.userprefs
-*.useroptions
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Temp files
-*.tmp
-*.temp
-*.log
-!*.md.log
 
 # OS generated files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
-desktop.ini
 
-# Environment variables
-.env
-.env.local
-.env.*
-!.env.example
-
-# Testing
-coverage/
-*.coverage
-htmlcov/
-.nyc_output/
-.reports/
-
-# Local configuration
-local.properties
-appsettings.Local.json
+# Build outputs
+Debug/
+Release/
+x64/
+x86/
 ```
