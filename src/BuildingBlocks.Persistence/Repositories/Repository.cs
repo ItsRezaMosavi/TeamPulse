@@ -1,9 +1,12 @@
-﻿using BuildingBlocks.Domain.Aggregates;
-using BuildingBlocks.Persistence.DbContexts;
+﻿using BuildingBlocks.Application.Persistence.Repositories;
+using BuildingBlocks.Domain.Aggregates;
+using BuildingBlocks.Persistence.Specifications;
+using Microsoft.EntityFrameworkCore;
 
 namespace BuildingBlocks.Persistence.Repositories;
 
-public class Repository<TAggregate>(ApplicationDbContext dbContext)
-    : Repository<TAggregate, Guid>(dbContext) where TAggregate : AggregateRoot
+public abstract class Repository<TAggregate>(DbContext dbContext, EfSpecificationEvaluator evaluator)
+    : Repository<TAggregate, Guid>(dbContext, evaluator), IRepository<TAggregate>
+    where TAggregate : AggregateRoot
 {
 }

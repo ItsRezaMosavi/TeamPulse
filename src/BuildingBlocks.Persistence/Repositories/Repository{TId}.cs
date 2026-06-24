@@ -1,12 +1,13 @@
 ﻿using BuildingBlocks.Application.Persistence.Repositories;
 using BuildingBlocks.Domain.Aggregates;
-using BuildingBlocks.Persistence.DbContexts;
+using BuildingBlocks.Persistence.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace BuildingBlocks.Persistence.Repositories;
 
-public class Repository<TAggregate, TId>(ApplicationDbContext dbContext)
-    : ReadRepository<TAggregate, TId>(dbContext), IRepository<TAggregate, TId> where TAggregate : AggregateRoot<TId>
+public abstract class Repository<TAggregate, TId>(DbContext dbContext, EfSpecificationEvaluator evaluator)
+    : ReadRepository<TAggregate, TId>(dbContext, evaluator), IRepository<TAggregate, TId>
+    where TAggregate : AggregateRoot<TId>
 {
     private readonly DbSet<TAggregate> _dbSet = dbContext.Set<TAggregate>();
 

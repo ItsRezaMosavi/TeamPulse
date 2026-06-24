@@ -1,8 +1,8 @@
 ﻿using BuildingBlocks.Domain.Events;
 
-namespace BuildingBlocks.Application.Abstractions;
+namespace BuildingBlocks.Application.Events;
 
-public interface IDomainEventDispatcher
+public interface IEventDispatcher
 {
     Task DispatchAsync(IEnumerable<IDomainEvent> events, CancellationToken cancellationToken = default);
 }

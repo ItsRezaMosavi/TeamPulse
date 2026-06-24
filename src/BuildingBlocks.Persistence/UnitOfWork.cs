@@ -1,11 +1,12 @@
 ﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Events;
 using BuildingBlocks.Application.Persistence;
 using BuildingBlocks.Domain.Events;
 using BuildingBlocks.Persistence.DbContexts;
 
 namespace BuildingBlocks.Persistence;
 
-public sealed class UnitOfWork(ApplicationDbContext dbContext, IDomainEventDispatcher domainEventDispatcher)
+public sealed class UnitOfWork(ApplicationDbContext dbContext, IEventDispatcher eventDispatcher)
     : IUnitOfWork
 {
     public ValueTask DisposeAsync()
@@ -21,7 +22,7 @@ public sealed class UnitOfWork(ApplicationDbContext dbContext, IDomainEventDispa
 
         try
         {
-            await domainEventDispatcher.DispatchAsync(domainEvents, cancellationToken);
+            await eventDispatcher.DispatchAsync(domainEvents, cancellationToken);
         }
         finally
         {

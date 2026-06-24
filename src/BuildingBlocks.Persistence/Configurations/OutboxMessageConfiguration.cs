@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Persistence.OutBox;
+﻿using BuildingBlocks.Persistence.Outbox;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

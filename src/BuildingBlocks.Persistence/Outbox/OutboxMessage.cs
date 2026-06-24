@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Persistence.OutBox;
+﻿namespace BuildingBlocks.Persistence.Outbox;
 
 public sealed class OutboxMessage
 {
