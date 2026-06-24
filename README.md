@@ -1,4 +1,4 @@
-# TeamPulse Building Blocks
+# Building Blocks
 
 A comprehensive collection of reusable building blocks for .NET 9.0 applications following Domain-Driven Design (DDD) and Clean Architecture principles.
 
