@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Application.Context;
 
-namespace BuildingBlocks.Infrastructure.Time;
+namespace BuildingBlocks.Infrastructure.DateTime;
 
 public class DateTime : IDateTimeProvider
 {

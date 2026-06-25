@@ -1,4 +1,6 @@
-﻿namespace BuildingBlocks.Domain.Entities;
+﻿using BuildingBlocks.Domain.Entities.Entities;
+
+namespace BuildingBlocks.Domain.Entities.AuditableEntities;
 
 /// <summary>
 /// Represents an auditable domain entity with generic identifier and user ID types.
@@ -14,39 +16,25 @@
 /// The protected methods <see cref="SetCreated"/> and <see cref="SetUpdated"/> should be called by derived classes
 /// to update audit information when changes occur.
 /// </remarks>
-public abstract class AuditableEntity<TId, TUserId> : Entity<TId>
+public abstract class AuditableEntity<TId, TUserId> : Entity<TId>, IAuditableEntity<TUserId>, IAuditSetter<TUserId>
 {
-    /// <summary>
-    /// Gets the UTC date and time when the entity was created.
-    /// </summary>
-    public DateTime CreatedAt { get; protected set; }
-    
-    /// <summary>
-    /// Gets the ID of the user who created the entity.
-    /// </summary>
-    public TUserId? CreatedBy { get; protected set; }
-    
-    /// <summary>
-    /// Gets the UTC date and time when the entity was last updated.
-    /// </summary>
-    public DateTime? UpdatedAt { get; protected set; }
-    
-    /// <summary>
-    /// Gets the ID of the user who last updated the entity.
-    /// </summary>
-    public TUserId? UpdatedBy { get; protected set; }
+    public DateTime CreatedAt { get; private set; }
+    public TUserId? CreatedBy { get; private set; }
+    public DateTime? UpdatedAt { get; private set; }
+    public TUserId? UpdatedBy { get; private set; }
 
     /// <summary>
     /// Sets the creation audit information.
     /// </summary>
     /// <param name="userId">The ID of the user creating the entity.</param>
+    /// <param name="createdAt"></param>
     /// <remarks>
     /// This method should be called when a new entity is being created to record
     /// the creation timestamp and the creator's user ID.
     /// </remarks>
-    protected void SetCreated(TUserId? userId)
+    void IAuditSetter<TUserId>.SetCreated(TUserId? userId, DateTime createdAt)
     {
-        CreatedAt = DateTime.UtcNow;
+        CreatedAt = createdAt;
         CreatedBy = userId;
     }
 
@@ -54,13 +42,14 @@ public abstract class AuditableEntity<TId, TUserId> : Entity<TId>
     /// Sets the update audit information.
     /// </summary>
     /// <param name="userId">The ID of the user updating the entity.</param>
+    /// <param name="updatedAt"></param>
     /// <remarks>
     /// This method should be called whenever an existing entity is modified to record
     /// the update timestamp and the updater's user ID.
     /// </remarks>
-    protected void SetUpdated(TUserId? userId)
+    void IAuditSetter<TUserId>.SetUpdated(TUserId? userId, DateTime updatedAt)
     {
-        UpdatedAt = DateTime.UtcNow;
+        UpdatedAt = updatedAt;
         UpdatedBy = userId;
     }
 }

@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Domain.Entities;
+namespace BuildingBlocks.Domain.Entities.Entities;
 
 /// <summary>
 /// Represents a domain entity with a default <see cref="Guid"/> identifier.

@@ -35,18 +35,19 @@ public interface ISoftDeletable<TUserId>
     /// Marks the entity as deleted by setting the deletion timestamp and user ID.
     /// </summary>
     /// <param name="userId">The ID of the user performing the deletion.</param>
+    /// <param name="deletedAt"></param>
     /// <remarks>
     /// If the entity is already deleted, this method returns without making changes.
     /// Sets <see cref="IsDeleted"/> to true, records the <see cref="DeletedBy"/> user ID,
     /// and sets <see cref="DeletedAt"/> to the current UTC time.
     /// </remarks>
-    virtual void Delete(TUserId userId)
+    virtual void Delete(TUserId userId,DateTime deletedAt)
     {
         if (IsDeleted)
             return;
         IsDeleted = true;
         DeletedBy = userId;
-        DeletedAt = DateTime.UtcNow;
+        DeletedAt = deletedAt;
     }
 
     /// <summary>

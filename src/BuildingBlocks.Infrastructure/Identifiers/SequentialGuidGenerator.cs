@@ -1,17 +1,18 @@
 ﻿using BuildingBlocks.Application.Abstractions;
+using BuildingBlocks.Application.Context;
 
 namespace BuildingBlocks.Infrastructure.Identifiers;
 
-public sealed class SequentialGuidGenerator : IGuidGenerator
+public sealed class SequentialGuidGenerator(IDateTimeProvider dateTimeProvider) : IGuidGenerator
 {
     public Guid Generate()
     {
         var randomBytes = Guid.NewGuid().ToByteArray();
-        var timestampBytes = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
-        
-        if(BitConverter.IsLittleEndian)
+        var timestampBytes = BitConverter.GetBytes(dateTimeProvider.UtcNow.Ticks);
+
+        if (BitConverter.IsLittleEndian)
             Array.Reverse(timestampBytes);
-        
+
         randomBytes[10] = timestampBytes[2];
         randomBytes[11] = timestampBytes[3];
         randomBytes[12] = timestampBytes[4];
