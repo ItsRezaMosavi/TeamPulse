@@ -32,14 +32,14 @@ public abstract class ResultBase
     /// </summary>
     /// <value><c>true</c> if the operation succeeded; otherwise, <c>false</c>.</value>
     public bool IsSuccess { get; }
-    
+
     /// <summary>
     /// Gets a value indicating whether the operation failed.
     /// </summary>
     /// <value><c>true</c> if the operation failed; otherwise, <c>false</c>.</value>
     /// <remarks>This is the inverse of <see cref="IsSuccess"/>.</remarks>
     public bool IsFailure => !IsSuccess;
-    
+
     /// <summary>
     /// Gets the collection of errors that occurred during the operation.
     /// </summary>
@@ -48,5 +48,5 @@ public abstract class ResultBase
     /// When <see cref="IsSuccess"/> is true, this property may be null or empty.
     /// When <see cref="IsFailure"/> is true, this array contains one or more errors.
     /// </remarks>
-    public Error[]? Errors { get; }
+    public IReadOnlyCollection<Error> Errors { get; }
 }

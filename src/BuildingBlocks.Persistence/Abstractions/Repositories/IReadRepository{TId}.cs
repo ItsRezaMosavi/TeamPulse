@@ -1,7 +1,7 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 using BuildingBlocks.Specification.Contracts;
 
-namespace BuildingBlocks.Application.Persistence.Repositories;
+namespace BuildingBlocks.Persistence.Abstractions.Repositories;
 
 /// <summary>
 /// 

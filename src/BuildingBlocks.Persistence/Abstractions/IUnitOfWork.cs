@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Application.Persistence;
+﻿namespace BuildingBlocks.Persistence.Abstractions;
 
 public interface IUnitOfWork : IAsyncDisposable
 {

@@ -51,14 +51,14 @@ public sealed class Result<T> : ResultBase
     /// </summary>
     /// <param name="value">The value to include in the successful result.</param>
     /// <returns>A <see cref="Result{T}"/> indicating success with the provided value.</returns>
-    public static Result<T> Success(T value) => new Result<T>(true, [], value);
-    
+    public static Result<T> Success(T value) => new(true, [], value);
+
     /// <summary>
     /// Creates a failed result instance with the specified errors.
     /// </summary>
     /// <param name="errors">One or more errors describing the failure.</param>
     /// <returns>A <see cref="Result{T}"/> indicating failure.</returns>
-    public static Result<T> Failure(Error[] errors) => new(false, errors, default);
+    public static Result<T> Failure(params Error[] errors) => new(false, errors, default);
 
     /// <summary>
     /// Implicitly converts a single error to a failed result.
@@ -66,14 +66,14 @@ public sealed class Result<T> : ResultBase
     /// <param name="error">The error to convert.</param>
     /// <returns>A failed <see cref="Result{T}"/> containing the error.</returns>
     public static implicit operator Result<T>(Error error) => Failure([error]);
-    
+
     /// <summary>
     /// Implicitly converts an array of errors to a failed result.
     /// </summary>
     /// <param name="errors">The errors to convert.</param>
     /// <returns>A failed <see cref="Result{T}"/> containing the errors.</returns>
     public static implicit operator Result<T>(Error[] errors) => Failure(errors);
-    
+
     /// <summary>
     /// Implicitly converts a value to a successful result.
     /// </summary>

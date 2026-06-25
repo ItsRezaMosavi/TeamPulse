@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 
-namespace BuildingBlocks.Application.Persistence.Repositories;
+namespace BuildingBlocks.Persistence.Abstractions.Repositories;
 
 /// <summary>
 /// 
