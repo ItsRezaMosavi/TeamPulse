@@ -25,9 +25,25 @@ public class ValidationError : Error
     /// Initializes a new instance of the <see cref="ValidationError"/> class.
     /// </summary>
     /// <param name="message">A human-readable message describing the validation failure.</param>
+    /// <param name="property"></param>
+    /// <param name="validationCode"></param>
     /// <param name="code">An optional numeric code overriding the default.</param>
-    public ValidationError(string message = DefaultMessage.Validation, int code = (int)DefaultCode.Validation)
+    public ValidationError(string message = DefaultMessage.Validation, string? property = null,
+                           string? validationCode = null, int code = (int)DefaultCode.Validation)
         : base(ErrorType.Validation, code, message)
     {
+        Property = property;
+        ValidationCode = validationCode;
     }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? Property { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ValidationCode { get; set; }
 }
