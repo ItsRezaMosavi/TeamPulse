@@ -1,8 +1,8 @@
 ﻿namespace BuildingBlocks.Application.Context;
 
 /// <summary>
-/// 
-/// </summary>
+    /// Represents the currently authenticated user with access to user identity, roles, and claims.
+    /// </summary>
 /// <typeparam name="TUserId"></typeparam>
 public interface ICurrentUser<out TUserId>
 {

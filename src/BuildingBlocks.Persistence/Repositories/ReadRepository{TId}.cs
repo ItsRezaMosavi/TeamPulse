@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BuildingBlocks.Persistence.Repositories;
 
 /// <summary>
-/// 
-/// </summary>
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
+    /// </summary>
 /// <param name="dbContext"></param>
 /// <param name="evaluator"></param>
 /// <typeparam name="TAggregate"></typeparam>
@@ -18,12 +18,12 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     private readonly DbSet<TAggregate> _dbSet = dbContext.Set<TAggregate>();
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     private IQueryable<TAggregate> Query => _dbSet.AsNoTracking();
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
@@ -35,7 +35,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>
@@ -52,7 +52,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>
@@ -65,7 +65,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>
@@ -77,7 +77,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>
@@ -90,7 +90,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>
@@ -103,7 +103,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>
@@ -115,7 +115,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
@@ -126,7 +126,7 @@ public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpec
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of read-only repository operations for aggregate roots with a generic identifier type.
     /// </summary>
     /// <param name="specification"></param>
     /// <param name="cancellationToken"></param>

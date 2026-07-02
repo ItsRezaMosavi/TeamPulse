@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BuildingBlocks.Persistence.Repositories;
 
 /// <summary>
-/// 
-/// </summary>
+    /// Base implementation of repository operations for aggregate roots with a default Guid identifier, including write operations.
+    /// </summary>
 /// <param name="dbContext"></param>
 /// <param name="evaluator"></param>
 /// <typeparam name="TAggregate"></typeparam>
