@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 
-namespace BuildingBlocks.Application.Repositories;
+namespace BuildingBlocks.Persistence.Abstractions.Repositories;
 
 /// <summary>
 /// Provides repository operations for aggregate roots with a generic identifier type, including write operations.

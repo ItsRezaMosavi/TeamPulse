@@ -1,5 +1,5 @@
-﻿using BuildingBlocks.Application.Repositories;
-using BuildingBlocks.Domain.Aggregates;
+﻿using BuildingBlocks.Domain.Aggregates;
+using BuildingBlocks.Persistence.Abstractions.Repositories;
 using BuildingBlocks.Persistence.Specifications;
 using Microsoft.EntityFrameworkCore;
 

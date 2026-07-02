@@ -1,6 +1,7 @@
 ﻿using BuildingBlocks.Application;
 using BuildingBlocks.Application.Abstractions;
-using BuildingBlocks.Application.Repositories;
+using BuildingBlocks.Persistence.Abstractions;
+using BuildingBlocks.Persistence.Abstractions.Repositories;
 using BuildingBlocks.Persistence.DbContexts;
 using BuildingBlocks.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;

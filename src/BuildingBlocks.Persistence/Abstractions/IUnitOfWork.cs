@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Application;
+﻿namespace BuildingBlocks.Persistence.Abstractions;
 
 /// <summary>
 /// Represents the Unit of Work pattern for managing database transactions and coordinating repositories.

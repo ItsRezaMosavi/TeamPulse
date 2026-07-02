@@ -1,7 +1,7 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 using BuildingBlocks.Specification.Contracts;
 
-namespace BuildingBlocks.Application.Repositories;
+namespace BuildingBlocks.Persistence.Abstractions.Repositories;
 
 /// <summary>
 /// Provides read-only repository operations for aggregate roots with a generic identifier type.
