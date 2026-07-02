@@ -63,8 +63,8 @@ public sealed class ValidationBehavior<TRequest, TResult>(IEnumerable<IValidator
 
         return await next();
     }
-    
-    
+
+
     /// <summary>
     /// Executes all registered validators for the specified request.
     /// </summary>
@@ -88,6 +88,7 @@ public sealed class ValidationBehavior<TRequest, TResult>(IEnumerable<IValidator
 
         return validationResults
               .SelectMany(r => r.Errors)
+              .Where(e => e is not null)
               .ToList();
     }
 
@@ -103,7 +104,13 @@ public sealed class ValidationBehavior<TRequest, TResult>(IEnumerable<IValidator
     /// </returns>
     private static Result<TResult> CreateFailureResult(IReadOnlyCollection<ValidationFailure> failures)
     {
-        return failures.Select(f => new ValidationError(f.PropertyName, f.ErrorMessage, f.ErrorCode))
+        return failures.DistinctBy(x => new
+                        {
+                            x.PropertyName,
+                            x.ErrorMessage,
+                            x.ErrorCode
+                        })
+                       .Select(f => new ValidationError(f.PropertyName, f.ErrorMessage, f.ErrorCode))
                        .ToArray();
     }
 }

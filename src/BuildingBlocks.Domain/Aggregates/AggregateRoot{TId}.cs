@@ -24,12 +24,19 @@ namespace BuildingBlocks.Domain.Aggregates;
 /// </remarks>
 public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvents
 {
-    protected static void CheckRule(IDomainRule rule)
+    private static void CheckRule(IDomainRule rule)
     {
         if (rule.IsBroken())
             throw new DomainRuleException(rule);
     }
 
+    /// <summary>
+    /// Validates one or more domain rules and throws an exception if any rule is violated.
+    /// </summary>
+    /// <param name="rules">The domain rules to validate.</param>
+    /// <exception cref="DomainRuleException">
+    /// Thrown when at least one domain rule is broken.
+    /// </exception>
     protected static void CheckRules(params IDomainRule[] rules)
     {
         foreach (var rule in rules)
