@@ -1,73 +1,62 @@
-```csharp
-# Build results
-bin/
-obj/
-out/
+```
+# Build artifacts
+*.xml.bak
+*.xml~
 
-# User-specific files
-.vs/
-*.user
-*.userosscache
-*.suo
-
-# Build results of Visual Studio projects
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
+# Dependencies and build directories
 build/
-bld/
-[Bb]in/
-[Oo]bj/
+dist/
+target/
 
-# CoreCLR native images
-*.dylib
-*.so
-*.dll
-*.exe
+# Logs and temp files
+*.log
+*.tmp
 
-# Packages
-*.nupkg
-packages/
-project.lock.json
-
-# Environment
+# Environment files
 .env
 .env.local
 *.env.*
 
-# Logs
-*.log
-
-# IDE
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # OS generated files
 .DS_Store
 Thumbs.db
-ehthumbs.db
-Icon?
-desktop.ini
 
-# Testing
-coverage/
-htmlcov/
-*.coverage
-
-# Dependency directories
-node_modules/
+# Python specific
 __pycache__/
-.mypy_cache/
-.pytest_cache/
-.npm
-.yarn
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
 
-# Compression
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+.META-INF/
+
+# Node.js specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# C/C++ specific
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+
+# Compression files
 *.zip
 *.gz
 *.tar

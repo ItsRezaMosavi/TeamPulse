@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SolutionDocumentation>
+  <SolutionName>Building Blocks</SolutionName>
+  <Description>A comprehensive set of building blocks for .NET applications providing infrastructure, domain, application, and cross-cutting concerns.</Description>
+  <TargetFramework>net9.0</TargetFramework>
+  
+  <Projects>
+    <Project>
+      <Name>BuildingBlocks.Domain</Name>
+      <Path>src/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj</Path>
+      <Description>Core domain layer containing entities, value objects, domain events, business rules, and aggregates. This is the heart of the domain-driven design architecture.</Description>
+      <Dependencies>None</Dependencies>
+      <KeyComponents>
+        <Component>Entities - Base entity classes and auditable entities</Component>
+        <Component>ValueObjects - Immutable value objects for domain modeling</Component>
+        <Component>Events - Domain events for event-driven architecture</Component>
+        <Component>Rules - Business rule implementations</Component>
+        <Component>Aggregates - Aggregate root base classes</Component>
+        <Component>Exceptions - Domain-specific exceptions</Component>
+      </KeyComponents>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Results</Name>
+      <Path>src/BuildingBlocks.Results/BuildingBlocks.Results.csproj</Path>
+      <Description>Provides result types for handling operation outcomes, errors, and success responses in a type-safe manner.</Description>
+      <Dependencies>None</Dependencies>
+      <KeyComponents>
+        <Component>Result types for success/failure handling</Component>
+        <Component>Error handling utilities</Component>
+      </KeyComponents>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Specification</Name>
+      <Path>src/BuildingBlocks.Specification/BuildingBlocks.Specification.csproj</Path>
+      <Description>Implements the Specification pattern for encapsulating query logic and business rules in a reusable manner.</Description>
+      <Dependencies>None</Dependencies>
+      <KeyComponents>
+        <Component>Specification base classes</Component>
+        <Component>Query composition utilities</Component>
+      </KeyComponents>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Pagination</Name>
+      <Path>src/BuildingBlocks.Pagination/BuildingBlocks.Pagination.csproj</Path>
+      <Description>Provides pagination support for querying large datasets efficiently.</Description>
+      <Dependencies>BuildingBlocks.Domain</Dependencies>
+      <KeyComponents>
+        <Component>Pagination models</Component>
+        <Component>Paged list implementations</Component>
+      </KeyComponents>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Application</Name>
+      <Path>src/BuildingBlocks.Application/BuildingBlocks.Application.csproj</Path>
+      <Description>Application layer containing CQRS patterns, commands, queries, behaviors, events, and context management for application services.</Description>
+      <Dependencies>
+        <Dependency>BuildingBlocks.Domain</Dependency>
+        <Dependency>BuildingBlocks.Results</Dependency>
+        <Dependency>BuildingBlocks.Specification</Dependency>
+      </Dependencies>
+      <KeyComponents>
+        <Component>CQRS - Command and Query Responsibility Segregation patterns</Component>
+        <Component>Commands - Command handlers and implementations</Component>
+        <Component>Queries - Query handlers and implementations</Component>
+        <Component>Behaviors - Pipeline behaviors for cross-cutting concerns</Component>
+        <Component>Events - Application events</Component>
+        <Component>Context - Application context management</Component>
+        <Component>Abstractions - Service abstractions</Component>
+      </KeyComponents>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Validation</Name>
+      <Path>src/BuildingBlocks.Validation/BuildingBlocks.Validation.csproj</Path>
+      <Description>Validation layer using FluentValidation for request and command validation with dependency injection support.</Description>
+      <Dependencies>
+        <Dependency>BuildingBlocks.Application</Dependency>
+        <Dependency>BuildingBlocks.Results</Dependency>
+      </Dependencies>
+      <KeyComponents>
+        <Component>FluentValidation integration</Component>
+        <Component>Validation behaviors</Component>
+        <Component>Custom validators</Component>
+      </KeyComponents>
+      <ExternalPackages>
+        <Package>FluentValidation (v12.1.1)</Package>
+        <Package>Microsoft.Extensions.DependencyInjection.Abstractions (v9.0.16)</Package>
+      </ExternalPackages>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Persistence</Name>
+      <Path>src/BuildingBlocks.Persistence/BuildingBlocks.Persistence.csproj</Path>
+      <Description>Persistence layer providing Entity Framework Core integration, repositories, specifications, and database context management.</Description>
+      <Dependencies>
+        <Dependency>BuildingBlocks.Application</Dependency>
+      </Dependencies>
+      <KeyComponents>
+        <Component>DbContexts - Database context base classes</Component>
+        <Component>Repositories - Generic and specialized repository implementations</Component>
+        <Component>Specifications - EF Core specification implementations</Component>
+        <Component>Interceptors - EF Core interceptors for auditing and more</Component>
+        <Component>Extensions - EF Core extension methods</Component>
+        <Component>Abstractions - Repository and unit of work abstractions</Component>
+      </KeyComponents>
+      <ExternalPackages>
+        <Package>Microsoft.EntityFrameworkCore (v9.0.16)</Package>
+        <Package>Microsoft.EntityFrameworkCore.SqlServer (v9.0.16)</Package>
+      </ExternalPackages>
+    </Project>
+
+    <Project>
+      <Name>BuildingBlocks.Infrastructure</Name>
+      <Path>src/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj</Path>
+      <Description>Infrastructure layer providing implementations for cross-cutting concerns including event handling, date/time services, and identifiers.</Description>
+      <Dependencies>
+        <Dependency>BuildingBlocks.Application</Dependency>
+        <Dependency>BuildingBlocks.Domain</Dependency>
+      </Dependencies>
+      <KeyComponents>
+        <Component>Events - Event handling and publishing infrastructure</Component>
+        <Component>DateTime - Date and time service implementations</Component>
+        <Component>Identifiers - ID generation and management</Component>
+      </KeyComponents>
+      <ExternalPackages>
+        <Package>MediatR (v9.0.0)</Package>
+        <Package>Microsoft.EntityFrameworkCore (v9.0.16)</Package>
+        <Package>Microsoft.Extensions.DependencyInjection.Abstractions (v9.0.16)</Package>
+      </ExternalPackages>
+    </Project>
+  </Projects>
+
+  <ArchitectureLayers>
+    <Layer>
+      <Name>Domain Layer</Name>
+      <Projects>
+        <Project>BuildingBlocks.Domain</Project>
+      </Projects>
+      <Responsibility>Contains business logic, entities, and domain rules. No external dependencies.</Responsibility>
+    </Layer>
+    <Layer>
+      <Name>Application Layer</Name>
+      <Projects>
+        <Project>BuildingBlocks.Application</Project>
+        <Project>BuildingBlocks.Results</Project>
+        <Project>BuildingBlocks.Specification</Project>
+        <Project>BuildingBlocks.Pagination</Project>
+        <Project>BuildingBlocks.Validation</Project>
+      </Projects>
+      <Responsibility>Orchestrates business logic, implements CQRS patterns, and defines application services.</Responsibility>
+    </Layer>
+    <Layer>
+      <Name>Infrastructure Layer</Name>
+      <Projects>
+        <Project>BuildingBlocks.Infrastructure</Project>
+        <Project>BuildingBlocks.Persistence</Project>
+      </Projects>
+      <Responsibility>Provides technical implementations for data access, external services, and cross-cutting concerns.</Responsibility>
+    </Layer>
+  </ArchitectureLayers>
+
+  <SolutionStructure>
+    <Folder name="BuildingBlocks">
+      <Folder name="src">
+        <Project>BuildingBlocks.Application</Project>
+        <Project>BuildingBlocks.Domain</Project>
+        <Project>BuildingBlocks.Infrastructure</Project>
+        <Project>BuildingBlocks.Pagination</Project>
+        <Project>BuildingBlocks.Persistence</Project>
+        <Project>BuildingBlocks.Results</Project>
+        <Project>BuildingBlocks.Specification</Project>
+        <Project>BuildingBlocks.Validation</Project>
+      </Folder>
+    </Folder>
+  </SolutionStructure>
+
+  <BuildConfigurations>
+    <Configuration name="Debug" platform="Any CPU" />
+    <Configuration name="Release" platform="Any CPU" />
+  </BuildConfigurations>
+</SolutionDocumentation>
