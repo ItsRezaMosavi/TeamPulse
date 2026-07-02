@@ -1,11 +1,9 @@
-﻿using BuildingBlocks.Application;
-using BuildingBlocks.Application.Abstractions;
-using BuildingBlocks.Application.Events;
+﻿using BuildingBlocks.Application.Events;
 using BuildingBlocks.Domain.Events;
 using BuildingBlocks.Persistence.Abstractions;
 using BuildingBlocks.Persistence.DbContexts;
 
-namespace BuildingBlocks.Persistence;
+namespace BuildingBlocks.Persistence.UnitOfWorks;
 
 /// <summary>
 /// Implements the Unit of Work pattern with domain event dispatching.
