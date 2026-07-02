@@ -24,9 +24,9 @@ public class ValidationError : Error
     /// <summary>
     /// Initializes a new instance of the <see cref="ValidationError"/> class.
     /// </summary>
+    /// <param name="property">The name of the property that failed validation.</param>
     /// <param name="message">A human-readable message describing the validation failure.</param>
-    /// <param name="property"></param>
-    /// <param name="validationCode"></param>
+    /// <param name="validationCode">An optional code identifying the specific validation rule that failed.</param>
     /// <param name="code">An optional numeric code overriding the default.</param>
     public ValidationError(string? property = null, string message = DefaultMessage.Validation,
                            string? validationCode = null, int code = (int)DefaultCode.Validation)
@@ -38,12 +38,14 @@ public class ValidationError : Error
 
 
     /// <summary>
-    /// 
+    /// Gets or sets the name of the property that failed validation.
     /// </summary>
+    /// <value>The property name, or null if the error is not property-specific.</value>
     public string? Property { get; set; }
 
     /// <summary>
-    /// 
+    /// Gets or sets the validation code identifying the specific rule that failed.
     /// </summary>
+    /// <value>A code representing the validation rule, or null if not specified.</value>
     public string? ValidationCode { get; set; }
 }
