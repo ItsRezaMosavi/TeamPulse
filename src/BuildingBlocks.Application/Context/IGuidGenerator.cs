@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Application.Abstractions;
+﻿namespace BuildingBlocks.Application.Context;
 
 public interface IGuidGenerator
 {

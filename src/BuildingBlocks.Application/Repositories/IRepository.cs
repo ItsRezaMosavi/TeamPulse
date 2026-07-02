@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 
-namespace BuildingBlocks.Persistence.Abstractions.Repositories;
+namespace BuildingBlocks.Application.Repositories;
 
 /// <summary>
 /// Provides repository operations for aggregate roots with a default Guid identifier, including write operations.

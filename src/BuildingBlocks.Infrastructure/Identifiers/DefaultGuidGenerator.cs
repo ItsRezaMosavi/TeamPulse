@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.Abstractions;
+﻿using BuildingBlocks.Application.Context;
 
 namespace BuildingBlocks.Infrastructure.Identifiers;
 

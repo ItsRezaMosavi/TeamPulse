@@ -1,7 +1,7 @@
-﻿using BuildingBlocks.Application.Abstractions;
+﻿using BuildingBlocks.Application;
+using BuildingBlocks.Application.Abstractions;
 using BuildingBlocks.Application.Events;
 using BuildingBlocks.Domain.Events;
-using BuildingBlocks.Persistence.Abstractions;
 using BuildingBlocks.Persistence.DbContexts;
 
 namespace BuildingBlocks.Persistence;

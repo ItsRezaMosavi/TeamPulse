@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.Application.CQRS.Behaviors;
+﻿using BuildingBlocks.Application.Abstractions.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BuildingBlocks.Validation;

@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Results;
 
-namespace BuildingBlocks.Application.CQRS.Commands;
+namespace BuildingBlocks.Application.Abstractions.CQRS.Commands;
 
 public interface ICommandHandler<in TCommand, TResult> where TCommand : ICommand<TResult>
 {
