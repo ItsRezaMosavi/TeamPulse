@@ -1,12 +1,12 @@
 ﻿namespace BuildingBlocks.Specification.Contracts;
 
 /// <summary>
-/// 
-/// </summary>
+    /// Evaluates specifications against IQueryable sources to apply filtering, ordering, and other query configurations.
+    /// </summary>
 public interface ISpecificationEvaluator
 {
     /// <summary>
-    /// 
+    /// Evaluates specifications against IQueryable sources to apply filtering, ordering, and other query configurations.
     /// </summary>
     /// <param name="query"></param>
     /// <param name="specification"></param>

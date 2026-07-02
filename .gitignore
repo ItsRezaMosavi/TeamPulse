@@ -1,50 +1,116 @@
-```
-# Compiled and build artifacts
-*.obj
-*.exe
+```gitignore
+# Build artifacts
 *.dll
+*.exe
+*.pdb
 *.so
-*.a
-*.pyc
-__pycache__/
+*.dylib
 *.o
+*.obj
+*.a
+*.lib
 *.out
-*.class
 
 # Dependencies
+packages/
 node_modules/
-venv/
-.venv/
-.env
-.env.local
-*.env.*
+bower_components/
+jspm_packages/
+vendor/
 
-# Build directories
+# Output directories
+bin/
+obj/
+out/
 dist/
 build/
 target/
-.gradle/
+release/
+debug/
 
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-
-# Editors
+# IDE files
+.vs/
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# System files
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*
+!.env.example
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Coverage
+# Testing
 coverage/
 htmlcov/
 .coverage
+*.coverage
 
 # Python specific
-.mypy_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.nox/
 .pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# .NET specific
+**/[Dd]ebug/
+**/[Dd]ebugPublic/
+**/[Rr]elease/
+**/[Rr]eleases/
+**/x64/
+**/x86/
+**/build/
+**/bld/
+**/[Bb]in/
+**/[Oo]bj/
+**/TestResults/
+*.UnitTest.dll
+*.Tests.dll
+*.nupkg
+!*.nuspec
+*.snk
+*.mobileconfig
+*.pidb
+*.userprefs
+*.DotSettings
+.vs/
+.vscode/
+
+# C# generated files
+Generated/
+**/*.g.cs
+**/*.g.i.cs
+
+# NuGet packages
+*.nupkg
+!*.nuspec
+packages/
 ```

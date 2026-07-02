@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BuildingBlocks.Persistence.Repositories;
 
 /// <summary>
-/// 
-/// </summary>
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
+    /// </summary>
 /// <param name="dbContext"></param>
 /// <param name="evaluator"></param>
 /// <typeparam name="TAggregate"></typeparam>
@@ -19,7 +19,7 @@ public abstract class Repository<TAggregate, TId>(DbContext dbContext, ISpecific
     private readonly DbSet<TAggregate> _dbSet = dbContext.Set<TAggregate>();
 
     /// <summary>
-    /// 
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="cancellationToken"></param>
@@ -29,7 +29,7 @@ public abstract class Repository<TAggregate, TId>(DbContext dbContext, ISpecific
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
     /// </summary>
     /// <param name="entities"></param>
     /// <param name="cancellationToken"></param>
@@ -39,7 +39,7 @@ public abstract class Repository<TAggregate, TId>(DbContext dbContext, ISpecific
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
     /// </summary>
     /// <param name="entity"></param>
     public void Update(TAggregate entity)
@@ -48,7 +48,7 @@ public abstract class Repository<TAggregate, TId>(DbContext dbContext, ISpecific
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
     /// </summary>
     /// <param name="entities"></param>
     public void UpdateRange(IEnumerable<TAggregate> entities)
@@ -57,7 +57,7 @@ public abstract class Repository<TAggregate, TId>(DbContext dbContext, ISpecific
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
     /// </summary>
     /// <param name="entity"></param>
     public void Remove(TAggregate entity)
@@ -66,7 +66,7 @@ public abstract class Repository<TAggregate, TId>(DbContext dbContext, ISpecific
     }
 
     /// <summary>
-    /// 
+    /// Base implementation of repository operations for aggregate roots with a generic identifier type, including write operations.
     /// </summary>
     /// <param name="entities"></param>
     public void RemoveRange(IEnumerable<TAggregate> entities)
