@@ -1,32 +1,31 @@
-```gitignore
+```
 # Build artifacts
+bin/
+obj/
 *.dll
 *.exe
 *.pdb
 *.so
 *.dylib
-*.o
-*.obj
-*.a
-*.lib
-*.out
+*.jar
+*.war
+*.ear
+*.class
 
 # Dependencies
 packages/
 node_modules/
 bower_components/
-jspm_packages/
 vendor/
 
-# Output directories
-bin/
-obj/
-out/
-dist/
-build/
-target/
-release/
-debug/
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*
 
 # IDE files
 .vs/
@@ -36,81 +35,14 @@ debug/
 *.swo
 *~
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment variables
-.env
-.env.local
-.env.*
-!.env.example
-
-# OS generated files
+# OS files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
-# Testing
+# Test and coverage
 coverage/
 htmlcov/
 .coverage
-*.coverage
-
-# Python specific
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.nox/
-.pytest_cache/
-.mypy_cache/
-.hypothesis/
-
-# .NET specific
-**/[Dd]ebug/
-**/[Dd]ebugPublic/
-**/[Rr]elease/
-**/[Rr]eleases/
-**/x64/
-**/x86/
-**/build/
-**/bld/
-**/[Bb]in/
-**/[Oo]bj/
-**/TestResults/
-*.UnitTest.dll
-*.Tests.dll
-*.nupkg
-!*.nuspec
-*.snk
-*.mobileconfig
-*.pidb
-*.userprefs
-*.DotSettings
-.vs/
-.vscode/
-
-# C# generated files
-Generated/
-**/*.g.cs
-**/*.g.i.cs
-
-# NuGet packages
-*.nupkg
-!*.nuspec
-packages/
+*.cover
+.nyc_output/
 ```
