@@ -28,7 +28,7 @@ public class ValidationError : Error
     /// <param name="property"></param>
     /// <param name="validationCode"></param>
     /// <param name="code">An optional numeric code overriding the default.</param>
-    public ValidationError(string message = DefaultMessage.Validation, string? property = null,
+    public ValidationError(string? property = null, string message = DefaultMessage.Validation,
                            string? validationCode = null, int code = (int)DefaultCode.Validation)
         : base(ErrorType.Validation, code, message)
     {

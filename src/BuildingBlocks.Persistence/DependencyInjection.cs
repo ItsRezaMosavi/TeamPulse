@@ -8,8 +8,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BuildingBlocks.Persistence;
 
+/// <summary>
+/// 
+/// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configureDbContext"></param>
+    /// <returns></returns>
     public static IServiceCollection AddBuildingBlocksInfrastructure(
         this IServiceCollection services,
         Action<DbContextOptionsBuilder> configureDbContext)
