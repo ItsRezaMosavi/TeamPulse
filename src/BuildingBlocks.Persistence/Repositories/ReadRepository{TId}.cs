@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.Domain.Aggregates;
 using BuildingBlocks.Persistence.Abstractions.Repositories;
+using BuildingBlocks.Persistence.DbContexts;
 using BuildingBlocks.Specification.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ namespace BuildingBlocks.Persistence.Repositories;
 /// <param name="evaluator"></param>
 /// <typeparam name="TAggregate"></typeparam>
 /// <typeparam name="TId"></typeparam>
-public abstract class ReadRepository<TAggregate, TId>(DbContext dbContext, ISpecificationEvaluator evaluator)
+public abstract class ReadRepository<TAggregate, TId>(BuildingBlocksDbContext dbContext, ISpecificationEvaluator evaluator)
     : IReadRepository<TAggregate, TId> where TAggregate : AggregateRoot<TId>
 {
     private readonly DbSet<TAggregate> _dbSet = dbContext.Set<TAggregate>();

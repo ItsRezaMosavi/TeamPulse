@@ -5,7 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace BuildingBlocks.Persistence.Outbox.Interceptors;
-
+/// <summary>
+/// Intercepts EF Core save operations and persists pending integration events
+/// as outbox messages within the current transaction.
+/// </summary>
+/// <remarks>
+/// This interceptor executes before changes are committed, ensuring integration events
+/// are stored atomically with the application's data.
+/// </remarks>
 public class OutboxInterceptor(IIntegrationEventPublisher publisher, IOutboxSerializer serializer)
     : SaveChangesInterceptor
 {

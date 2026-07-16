@@ -20,7 +20,7 @@ namespace BuildingBlocks.Persistence.DbContexts;
 /// 
 /// Extend this class or create derived contexts to add DbSets for your domain entities.
 /// </remarks>
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class BuildingBlocksDbContext(DbContextOptions<BuildingBlocksDbContext> options) : DbContext(options)
 {
     /// <summary>
     /// Configures the database schema and entity mappings during context initialization.
@@ -37,7 +37,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     /// </remarks>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BuildingBlocksDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

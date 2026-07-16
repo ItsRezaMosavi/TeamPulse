@@ -22,7 +22,7 @@ namespace BuildingBlocks.Persistence.UnitOfWorks;
 /// The domain event dispatch occurs in a try-finally block to ensure events are cleared
 /// even if dispatch fails, preventing duplicate event processing on retry scenarios.
 /// </remarks>
-public sealed class UnitOfWork(ApplicationDbContext dbContext, IEventDispatcher eventDispatcher)
+public sealed class UnitOfWork(BuildingBlocksDbContext dbContext, IEventDispatcher eventDispatcher)
     : IUnitOfWork
 {
     /// <summary>
@@ -83,7 +83,7 @@ public sealed class UnitOfWork(ApplicationDbContext dbContext, IEventDispatcher 
     /// filters those with non-empty event collections, and flattens all events into
     /// a single list for batch dispatch.
     /// </remarks>
-    private static List<IDomainEvent> GetDomainEvents(ApplicationDbContext dbContext)
+    private static List<IDomainEvent> GetDomainEvents(BuildingBlocksDbContext dbContext)
     {
         return dbContext.ChangeTracker
                         .Entries<IHasDomainEvents>()
@@ -102,7 +102,7 @@ public sealed class UnitOfWork(ApplicationDbContext dbContext, IEventDispatcher 
     /// and calls ClearDomainEvents on each to remove processed events from their
     /// internal collections, preventing duplicate dispatch.
     /// </remarks>
-    private static void ClearDomainEvents(ApplicationDbContext dbContext)
+    private static void ClearDomainEvents(BuildingBlocksDbContext dbContext)
     {
         var aggregates = dbContext.ChangeTracker
                                   .Entries<IHasDomainEvents>()

@@ -4,7 +4,14 @@ using BuildingBlocks.Persistence.Abstractions.Outbox;
 using Microsoft.Extensions.Options;
 
 namespace BuildingBlocks.Persistence.Outbox.Serialization;
-
+/// <summary>
+/// Serializes and deserializes integration events using JSON.
+/// </summary>
+/// <remarks>
+/// Stores the event payload together with its CLR type information,
+/// allowing the original integration event to be reconstructed later
+/// during outbox processing.
+/// </remarks>
 public sealed class JsonOutboxSerializer(IOptions<JsonSerializerOptions> options) : IOutboxSerializer
 {
     private readonly JsonSerializerOptions _options = options.Value;
