@@ -1,4 +1,3 @@
-using BuildingBlocks.Domain.Entities;
 using BuildingBlocks.Domain.Entities.Entities;
 using BuildingBlocks.Domain.Events;
 using BuildingBlocks.Domain.Exceptions;

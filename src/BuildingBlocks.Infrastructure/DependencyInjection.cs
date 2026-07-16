@@ -1,7 +1,6 @@
 ﻿using BuildingBlocks.Application.Context;
 using BuildingBlocks.Infrastructure.Identifiers;
 using Microsoft.Extensions.DependencyInjection;
-using DateTime = BuildingBlocks.Infrastructure.DateTime.DateTime;
 
 namespace BuildingBlocks.Infrastructure;
 

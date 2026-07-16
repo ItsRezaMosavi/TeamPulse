@@ -18,6 +18,8 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
+      <Folder Include="Outbox\Configuration\" />
+      <Folder Include="Outbox\Options\" />
     </ItemGroup>
 
 </Project>

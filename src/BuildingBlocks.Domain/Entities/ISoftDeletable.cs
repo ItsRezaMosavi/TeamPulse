@@ -41,7 +41,7 @@ public interface ISoftDeletable<TUserId>
     /// Sets <see cref="IsDeleted"/> to true, records the <see cref="DeletedBy"/> user ID,
     /// and sets <see cref="DeletedAt"/> to the current UTC time.
     /// </remarks>
-    virtual void Delete(TUserId userId,DateTime deletedAt)
+    void Delete(TUserId userId,DateTime deletedAt)
     {
         if (IsDeleted)
             return;
@@ -58,7 +58,7 @@ public interface ISoftDeletable<TUserId>
     /// Sets <see cref="IsDeleted"/> to false, clears <see cref="DeletedBy"/>,
     /// and sets <see cref="DeletedAt"/> to null.
     /// </remarks>
-    virtual void Restore()
+    void Restore()
     {
         if (!IsDeleted)
             return;
