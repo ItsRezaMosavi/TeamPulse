@@ -3,16 +3,19 @@ using BuildingBlocks.Results.Defaults;
 namespace BuildingBlocks.Results.Errors;
 
 /// <summary>
-/// Represents an error indicating that a requested resource was not found.
+/// Represents an error indicating that a requested resource could not be found.
 /// </summary>
 /// <remarks>
-/// This error corresponds to HTTP 404 Not Found and is used when:
+/// This error is used when an operation references a resource that does not
+/// exist or is no longer available.
+///
+/// Typical scenarios include:
 /// <list type="bullet">
-/// <item><description>An entity with the specified ID does not exist</description></item>
-/// <item><description>A requested endpoint or route is not available</description></item>
-/// <item><description>A referenced resource cannot be located</description></item>
+/// <item><description>An entity with the specified identifier does not exist.</description></item>
+/// <item><description>A referenced resource cannot be located.</description></item>
+/// <item><description>A dependency required to complete the operation is missing.</description></item>
 /// </list>
-/// 
+///
 /// Usage example:
 /// <code>
 /// var result = Result.Failure(new NotFoundError("User with ID 123 was not found"));
@@ -24,8 +27,8 @@ public class NotFoundError : Error
     /// Initializes a new instance of the <see cref="NotFoundError"/> class.
     /// </summary>
     /// <param name="message">A human-readable message describing the error.</param>
-    /// <param name="code">An optional numeric code overriding the default.</param>
-    public NotFoundError(string message = DefaultMessage.NotFound, int code = (int)DefaultCode.NotFound)
+    /// <param name="code">An optional application-specific error code overriding the default.</param>
+    public NotFoundError(string message = DefaultMessage.NotFound, string code = DefaultErrorCodes.NotFound)
         : base(ErrorType.NotFound, code, message)
     {
     }

@@ -1,12 +1,17 @@
 ﻿using BuildingBlocks.Application.Context;
 using BuildingBlocks.Persistence.Abstractions.Outbox;
 using BuildingBlocks.Persistence.DbContexts;
+using BuildingBlocks.Persistence.Extensions;
 using BuildingBlocks.Persistence.Outbox.Entities;
+using BuildingBlocks.Persistence.Outbox.Extensions;
 using BuildingBlocks.Persistence.Outbox.Options;
+using BuildingBlocks.Persistence.Outbox.QuerySpecifications;
+using BuildingBlocks.Specification.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace BuildingBlocks.Persistence.Outbox.Processing;
+namespace BuildingBlocks.Persistence.Outbox.Processors;
+
 /// <summary>
 /// Processes pending outbox messages and publishes them to the configured external event bus.
 /// </summary>
@@ -20,13 +25,15 @@ public class OutboxProcessor(
 	IOutboxSerializer outboxSerializer,
 	IExternalEventBus externalEventBus,
 	IDateTimeProvider dateTimeProvider,
+	OutboxWorkerIdentity workerIdentity,
+	ISpecificationEvaluator specificationEvaluator,
 	IOptions<OutboxOptions> options)
 {
 	private readonly OutboxOptions _options = options.Value;
 
 	public async Task ProcessAsync(CancellationToken cancellationToken = default)
 	{
-		var messages = await GetMessages(cancellationToken);
+		var messages = await AcquireBatchAsync(cancellationToken);
 
 		foreach (var message in messages)
 		{
@@ -38,21 +45,43 @@ public class OutboxProcessor(
 
 				message.Complete(dateTimeProvider.UtcNow);
 			}
+			catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+			{
+				throw;
+			}
 			catch (Exception ex)
 			{
-				message.Fail(ex.ToString(), dateTimeProvider.UtcNow);
+				message.Fail(ex.ToString(), dateTimeProvider.UtcNow, _options.MaxRetryAttempts);
 			}
 		}
 
 		await dbContext.SaveChangesAsync(cancellationToken);
 	}
 
-	private async Task<List<OutboxMessage>> GetMessages(CancellationToken cancellationToken = default)
+	private async Task<List<OutboxMessage>> AcquireBatchAsync(CancellationToken cancellationToken = default)
 	{
-		return await dbContext.Set<OutboxMessage>()
-							  .Where(m => !m.IsProcessed)
-							  .OrderBy(m => m.OccurredOnUtc)
-							  .Take(_options.BatchSize)
-							  .ToListAsync(cancellationToken);
+		var now = dateTimeProvider.UtcNow;
+
+		var specification = new OutboxMessageQuery(now,
+																_options.ProcessingTimeout,
+																_options.BatchSize,
+																_options.RetryDelay);
+
+		var messages = await dbContext.Set<OutboxMessage>()
+									  .WithSpecification(specification, specificationEvaluator)
+									  .ToListAsync(cancellationToken);
+
+		messages.ForEach(m => m.StartProcessing(workerIdentity.Id, now));
+
+		try
+		{
+			await dbContext.SaveChangesAsync(cancellationToken);
+		}
+		catch (DbUpdateConcurrencyException)
+		{
+			return [];
+		}
+
+		return messages;
 	}
 }

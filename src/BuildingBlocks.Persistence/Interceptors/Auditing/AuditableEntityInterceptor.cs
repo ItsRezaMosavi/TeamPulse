@@ -3,7 +3,7 @@ using BuildingBlocks.Domain.Entities.AuditableEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace BuildingBlocks.Persistence.Interceptors;
+namespace BuildingBlocks.Persistence.Interceptors.Auditing;
 
 /// <summary>
 /// Intercepts EF Core save operations to automatically populate audit information on entities.

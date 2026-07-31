@@ -1,5 +1,5 @@
 ﻿using BuildingBlocks.Persistence.Outbox.Options;
-using BuildingBlocks.Persistence.Outbox.Processing;
+using BuildingBlocks.Persistence.Outbox.Processors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -38,7 +38,7 @@ public sealed class OutboxBackgroundService(
 				await processor.ProcessAsync(stoppingToken);
 				await Task.Delay(_options.PollingInterval, stoppingToken);
 			}
-			catch (OperationCanceledException)
+			catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
 			{
 				break;
 			}

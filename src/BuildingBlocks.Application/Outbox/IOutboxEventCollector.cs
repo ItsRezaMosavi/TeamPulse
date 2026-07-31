@@ -4,7 +4,7 @@
 /// Collects integration events that will be persisted to the Outbox
 /// as part of the current transaction.
 /// </summary>
-public interface IIntegrationEventPublisher
+public interface IOutboxEventCollector
 {
     IReadOnlyCollection<IIntegrationEvent> GetEvents();
 

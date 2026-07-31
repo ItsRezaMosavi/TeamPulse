@@ -1,15 +1,15 @@
 ﻿namespace BuildingBlocks.Results.Defaults;
 
-internal enum DefaultCode
+internal static class DefaultErrorCodes
 {
-    Validation = 400,
-    Unauthorized = 401,
-    Forbidden = 403,
-    NotFound = 404,
-    Conflict = 409,
-    BusinessRule = 422,
-    TooManyRequests = 429,
-    Failure = 500,
-    Unavailable = 503,
-    Timeout = 504,
+    public const string Validation = "Validation.Default";
+    public const string Unauthorized = "Authentication.Unauthorized";
+    public const string Forbidden = "Authorization.Forbidden";
+    public const string NotFound = "Common.NotFound";
+    public const string Conflict = "Common.Conflict";
+    public const string BusinessRule = "Business.RuleViolation";
+    public const string TooManyRequests = "Common.TooManyRequests";
+    public const string Failure = "Common.Failure";
+    public const string Unavailable = "Infrastructure.Unavailable";
+    public const string Timeout = "Infrastructure.Timeout";
 }

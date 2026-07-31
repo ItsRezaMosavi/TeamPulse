@@ -3,7 +3,7 @@ using BuildingBlocks.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace BuildingBlocks.Persistence.Interceptors;
+namespace BuildingBlocks.Persistence.Interceptors.SoftDelete;
 
 /// <summary>
 /// Intercepts EF Core save operations to implement soft delete behavior.

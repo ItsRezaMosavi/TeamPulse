@@ -8,7 +8,7 @@
 /// used throughout the Building Blocks persistence infrastructure. Using these
 /// constants ensures uniformity across migrations, queries, and configurations.
 /// </remarks>
-public static class Settings
+public static class PersistenceSettings
 {
     /// <summary>
     /// Database schema name constants.
@@ -43,5 +43,8 @@ public static class Settings
         /// dispatching them externally, ensuring atomicity between state changes and event publication.
         /// </remarks>
         public const string OutboxMessage = "OutboxMessage";
+        
+        
+        public const string IdempotencyRecord =  "IdempotencyRecords";
     }
 }

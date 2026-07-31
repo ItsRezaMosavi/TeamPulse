@@ -1,6 +1,6 @@
 ﻿using BuildingBlocks.Application.Outbox;
 
-namespace BuildingBlocks.Persistence.Outbox.Processing;
+namespace BuildingBlocks.Persistence.Abstractions.Outbox;
 
 /// <summary>
 /// Represents an external message bus capable of publishing integration events
