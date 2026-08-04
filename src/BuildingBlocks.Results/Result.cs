@@ -26,39 +26,55 @@
 /// </remarks>
 public sealed class Result : ResultBase
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Result"/> class.
-    /// </summary>
-    /// <param name="isSuccess">Indicates whether the operation was successful.</param>
-    /// <param name="errors">The collection of errors if the operation failed.</param>
-    public Result(bool isSuccess, Error[] errors) : base(isSuccess, errors)
-    {
-    }
+	/// <summary>
+	///     Initializes a new instance of the <see cref="Result" /> class.
+	/// </summary>
+	/// <param name="isSuccess">Indicates whether the operation was successful.</param>
+	/// <param name="errors">The collection of errors if the operation failed.</param>
+	public Result(bool isSuccess, Error[] errors) : base(isSuccess, errors)
+	{
+	}
 
-    /// <summary>
-    /// Creates a successful result instance.
-    /// </summary>
-    /// <returns>A <see cref="Result"/> indicating success.</returns>
-    public static Result Success() => new Result(true, []);
-    
-    /// <summary>
-    /// Creates a failed result instance with the specified errors.
-    /// </summary>
-    /// <param name="errors">One or more errors describing the failure.</param>
-    /// <returns>A <see cref="Result"/> indicating failure.</returns>
-    public static Result Failure(params Error[] errors) => new Result(false, errors);
-    
-    /// <summary>
-    /// Implicitly converts an array of errors to a failed result.
-    /// </summary>
-    /// <param name="errors">The errors to convert.</param>
-    /// <returns>A failed <see cref="Result"/> containing the errors.</returns>
-    public static implicit operator Result(Error[] errors) => Failure(errors);
-    
-    /// <summary>
-    /// Implicitly converts a single error to a failed result.
-    /// </summary>
-    /// <param name="error">The error to convert.</param>
-    /// <returns>A failed <see cref="Result"/> containing the error.</returns>
-    public static implicit operator Result(Error error) => Failure(error);
+	/// <summary>
+	///     Creates a successful result instance.
+	/// </summary>
+	/// <returns>A <see cref="Result" /> indicating success.</returns>
+	public static Result Success()
+	{
+		return new Result(true, []);
+	}
+
+	/// <summary>
+	///     Creates a failed result instance with the specified errors.
+	/// </summary>
+	/// <param name="errors">One or more errors describing the failure.</param>
+	/// <returns>A <see cref="Result" /> indicating failure.</returns>
+	public static Result Failure(params Error[] errors)
+	{
+		ArgumentNullException.ThrowIfNull(errors);
+
+		if (errors.Length == 0) throw new ArgumentException("Errors cannot be empty", nameof(errors));
+
+		return new Result(false, errors);
+	}
+
+	/// <summary>
+	///     Implicitly converts an array of errors to a failed result.
+	/// </summary>
+	/// <param name="errors">The errors to convert.</param>
+	/// <returns>A failed <see cref="Result" /> containing the errors.</returns>
+	public static implicit operator Result(Error[] errors)
+	{
+		return Failure(errors);
+	}
+
+	/// <summary>
+	///     Implicitly converts a single error to a failed result.
+	/// </summary>
+	/// <param name="error">The error to convert.</param>
+	/// <returns>A failed <see cref="Result" /> containing the error.</returns>
+	public static implicit operator Result(Error error)
+	{
+		return Failure(error);
+	}
 }

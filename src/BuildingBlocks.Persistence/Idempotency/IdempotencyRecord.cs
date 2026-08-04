@@ -1,13 +1,25 @@
 ﻿using BuildingBlocks.Application.Idempotency.Enums;
-using BuildingBlocks.Domain.Entities.Entities;
+using BuildingBlocks.Domain.Entities.ConcurrencyEntities;
 
 namespace BuildingBlocks.Persistence.Idempotency;
 
-public sealed class IdempotencyRecord : Entity
+public sealed class IdempotencyRecord : ConcurrencyEntity
 {
 	private IdempotencyRecord()
 	{
 	}
+
+	public string Key { get; private set; } = default!;
+
+	public IdempotencyStatus Status { get; private set; }
+
+	public string? SerializedResponse { get; private set; }
+
+	public DateTime CreatedAtUtc { get; private set; }
+
+	public DateTime? CompletedAtUtc { get; private set; }
+
+	public DateTime ExpiresAtUtc { get; private set; }
 
 	public static IdempotencyRecord Create(string key,
 										   IdempotencyStatus status,
@@ -26,21 +38,6 @@ public sealed class IdempotencyRecord : Entity
 			SerializedResponse = serializedResponse
 		};
 	}
-
-	public string Key { get; private set; } = default!;
-
-	public IdempotencyStatus Status { get; private set; }
-
-	public string? SerializedResponse { get; private set; }
-
-	public DateTime CreatedAtUtc { get; private set; }
-
-	public DateTime? CompletedAtUtc { get; private set; }
-
-	public DateTime ExpiresAtUtc { get; private set; }
-
-	public byte[] RowVersion { get; private set; } = default!;
-
 
 	public bool IsExpired(DateTime now) => ExpiresAtUtc <= now;
 

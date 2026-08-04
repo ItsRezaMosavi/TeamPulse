@@ -1,10 +1,10 @@
-﻿using BuildingBlocks.Domain.Entities.Entities;
+﻿using BuildingBlocks.Domain.Entities.ConcurrencyEntities;
 using BuildingBlocks.Persistence.Outbox.Enums;
 using BuildingBlocks.Persistence.Outbox.Serialization;
 
 namespace BuildingBlocks.Persistence.Outbox.Entities;
 
-public class OutboxMessage : Entity
+public class OutboxMessage : ConcurrencyEntity
 {
 	private OutboxMessage(string type,
 						  string payload,
@@ -21,15 +21,6 @@ public class OutboxMessage : Entity
 		EventVersion = eventVersion;
 
 		Status = OutboxStatus.Pending;
-	}
-
-
-	public static OutboxMessage Create(SerializedIntegrationEvent integrationEvent)
-	{
-		return new OutboxMessage(integrationEvent.Type,
-								 integrationEvent.Payload,
-								 integrationEvent.OccuredOnUtc,
-								 integrationEvent.EventVersion);
 	}
 
 
@@ -68,6 +59,15 @@ public class OutboxMessage : Entity
 	public bool IsFinal => Status is OutboxStatus.Completed or OutboxStatus.Failed;
 
 
+	public static OutboxMessage Create(SerializedIntegrationEvent integrationEvent)
+	{
+		return new OutboxMessage(integrationEvent.Type,
+								 integrationEvent.Payload,
+								 integrationEvent.OccuredOnUtc,
+								 integrationEvent.EventVersion);
+	}
+
+
 	public void StartProcessing(Guid workerId, DateTime startedOnUtc)
 	{
 		ArgumentOutOfRangeException.ThrowIfEqual(workerId, Guid.Empty);
@@ -87,9 +87,9 @@ public class OutboxMessage : Entity
 	{
 		ArgumentOutOfRangeException.ThrowIfEqual(processedOnUtc, default);
 		ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(processedOnUtc, OccurredOnUtc);
-		
+
 		if (IsFinal) return;
-		
+
 		Status = OutboxStatus.Completed;
 
 		ProcessedOnUtc = processedOnUtc;

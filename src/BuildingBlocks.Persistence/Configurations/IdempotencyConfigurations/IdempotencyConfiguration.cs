@@ -1,11 +1,13 @@
-﻿using BuildingBlocks.Persistence.Idempotency;
+﻿using BuildingBlocks.Persistence.Configurations.BaseConfigurations;
+using BuildingBlocks.Persistence.Configurations.ConcurrencyEntityConfigurations;
+using BuildingBlocks.Persistence.Idempotency;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BuildingBlocks.Persistence.Configurations.IdempotencyConfigurations;
 
 /// <inheritdoc />
-public class IdempotencyConfiguration : EntityBaseConfiguration<IdempotencyRecord, Guid>
+public class IdempotencyConfiguration : EntityBaseConfiguration<IdempotencyRecord>
 {
 	/// <inheritdoc />
 	public override void Configure(EntityTypeBuilder<IdempotencyRecord> builder)
@@ -31,7 +33,6 @@ public class IdempotencyConfiguration : EntityBaseConfiguration<IdempotencyRecor
 		builder.Property(x => x.ExpiresAtUtc)
 			   .IsRequired();
 
-		builder.Property(x => x.RowVersion)
-			   .IsRowVersion();
+		builder.ConfigureConcurrency();
 	}
 }

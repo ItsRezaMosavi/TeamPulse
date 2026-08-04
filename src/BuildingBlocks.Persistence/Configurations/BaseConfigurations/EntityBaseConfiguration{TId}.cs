@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BuildingBlocks.Persistence.Configurations;
+namespace BuildingBlocks.Persistence.Configurations.BaseConfigurations;
 
 public abstract class EntityBaseConfiguration<TEntity, TId> : IEntityTypeConfiguration<TEntity>
 	where TEntity : Entity<TId>
