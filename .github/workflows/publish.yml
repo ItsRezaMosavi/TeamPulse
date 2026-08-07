@@ -10,10 +10,14 @@ permissions:
   packages: write
 
 jobs:
+  
+  # ==========================================
+  # Pack individual packages
+  # ==========================================
   pack:
     name: Pack ${{ matrix.project }}
     runs-on: windows-latest
-
+    
     strategy:
       matrix:
         project:
@@ -25,7 +29,7 @@ jobs:
           - BuildingBlocks.Specification
           - BuildingBlocks.Validation
           - BuildingBlocks.Pagination
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,11 +55,15 @@ jobs:
         with:
           name: ${{ matrix.project }}
           path: ./packages/${{ matrix.project }}/*.nupkg
-
+  
+  
+  # ==========================================
+  # Pack complete package
+  # ==========================================
   pack-all:
     name: Pack Reza.BuildingBlocks
     runs-on: windows-latest
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -81,15 +89,20 @@ jobs:
         with:
           name: Reza.BuildingBlocks
           path: ./packages/complete/*.nupkg
-
+  
+  
+  # ==========================================
+  # Publish all packages
+  # ==========================================
   publish:
     name: Publish to GitHub Packages
+    
     needs:
       - pack
       - pack-all
-
+    
     runs-on: windows-latest
-
+    
     steps:
       - name: Download individual packages
         uses: actions/download-artifact@v4
@@ -109,9 +122,27 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Publish packages
+      - name: List packages
+        shell: pwsh
         run: |
-          dotnet nuget push "./packages/*.nupkg" `
-            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
-            --api-key "${{ secrets.GITHUB_TOKEN }}" `
-            --skip-duplicate
+          Write-Host "Packages:"
+          Get-ChildItem -Path "./packages" -Recurse -Filter "*.nupkg"
+
+      - name: Publish packages
+        shell: pwsh
+        run: |
+          $packages = Get-ChildItem -Path "./packages" -Recurse -Filter "*.nupkg"
+          
+          if ($packages.Count -eq 0) {
+              Write-Error "No NuGet packages found."
+              exit 1
+          }
+          
+          foreach ($package in $packages) {
+              Write-Host "Publishing $($package.Name)..."
+          
+              dotnet nuget push $package.FullName `
+                --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
+                --api-key "${{ secrets.GITHUB_TOKEN }}" `
+                --skip-duplicate
+          }
