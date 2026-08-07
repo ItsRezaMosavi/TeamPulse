@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageId>Reza.BuildingBlocks.Results</PackageId>
+        <Description>Result pattern implementation for handling operation outcomes and errors</Description>
+        <PackageTags>result-pattern;error-handling;operation-result;either;monad</PackageTags>
     </PropertyGroup>
-
 </Project>

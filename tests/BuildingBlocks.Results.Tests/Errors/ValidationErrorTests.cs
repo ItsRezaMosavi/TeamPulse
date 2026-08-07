@@ -17,12 +17,12 @@ public class ValidationErrorTests
 	[Fact]
 	public void ValidationError_should_set_property_and_validation_code()
 	{
-		var property = "TestProperty";
-		var code = "TestCode";
+		const string property = "TestProperty";
+		const string code = "TestCode";
 
 		var validationError = new ValidationError(property, validationCode: code);
 
-		validationError.Property.Should().Be(code);
+		validationError.Property.Should().Be(property);
 		validationError.ValidationCode.Should().Be(code);
 	}
 

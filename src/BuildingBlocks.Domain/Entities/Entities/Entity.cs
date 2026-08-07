@@ -10,4 +10,8 @@ namespace BuildingBlocks.Domain.Entities.Entities;
 /// </remarks>
 public abstract class Entity : Entity<Guid>
 {
+	protected Entity()
+	{
+		Id = Guid.NewGuid();
+	}
 }

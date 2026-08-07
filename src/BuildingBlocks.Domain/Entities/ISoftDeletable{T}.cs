@@ -25,17 +25,17 @@ public interface ISoftDeletable<TUserId>
 	/// <summary>
 	///     Gets the UTC date and time when the entity was soft deleted.
 	/// </summary>
-	public DateTime? DeletedAt { get; protected set; }
+	public DateTime? DeletedAt { get; }
 
 	/// <summary>
 	///     Gets the ID of the user who soft deleted the entity.
 	/// </summary>
-	public TUserId? DeletedBy { get; protected set; }
+	public TUserId? DeletedBy { get; }
 
 	/// <summary>
 	///     Gets a value indicating whether the entity is currently marked as deleted.
 	/// </summary>
-	bool IsDeleted { get; protected set; }
+	bool IsDeleted { get; }
 
 	/// <summary>
 	///     Marks the entity as deleted by setting the deletion timestamp and user ID.
@@ -47,13 +47,7 @@ public interface ISoftDeletable<TUserId>
 	///     Sets <see cref="IsDeleted" /> to true, records the <see cref="DeletedBy" /> user ID,
 	///     and sets <see cref="DeletedAt" /> to the current UTC time.
 	/// </remarks>
-	void Delete(TUserId userId, DateTime deletedAt)
-	{
-		if (IsDeleted) return;
-		IsDeleted = true;
-		DeletedBy = userId;
-		DeletedAt = deletedAt;
-	}
+	void Delete(TUserId userId, DateTime deletedAt);
 
 	/// <summary>
 	///     Restores a previously deleted entity by clearing the deletion information.
@@ -63,11 +57,5 @@ public interface ISoftDeletable<TUserId>
 	///     Sets <see cref="IsDeleted" /> to false, clears <see cref="DeletedBy" />,
 	///     and sets <see cref="DeletedAt" /> to null.
 	/// </remarks>
-	void Restore()
-	{
-		if (!IsDeleted) return;
-		IsDeleted = false;
-		DeletedBy = default;
-		DeletedAt = null;
-	}
+	void Restore();
 }

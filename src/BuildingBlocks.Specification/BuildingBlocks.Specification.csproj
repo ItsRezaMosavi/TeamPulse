@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageId>Reza.BuildingBlocks.Specification</PackageId>
+        <Description>Specification pattern implementation for building reusable query specifications</Description>
+        <PackageTags>specification-pattern;query;filter;criteria;ddd</PackageTags>
     </PropertyGroup>
-
 </Project>

@@ -1,14 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageId>Reza.BuildingBlocks.Pagination</PackageId>
+        <Description>Pagination abstractions and implementations for paged lists and queries</Description>
+        <PackageTags>pagination;paged-list;query;filtering;sorting</PackageTags>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
-    </ItemGroup>
-
 </Project>

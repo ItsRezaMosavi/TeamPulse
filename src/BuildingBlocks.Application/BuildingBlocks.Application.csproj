@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageId>Reza.BuildingBlocks.Application</PackageId>
+        <Description>Application layer abstractions including CQRS, commands, queries, and handlers</Description>
+        <PackageTags>cqrs;mediator;application-layer;commands;queries</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,8 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.16" />
-      <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.16" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options"/>
     </ItemGroup>
 
     <ItemGroup>

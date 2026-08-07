@@ -1,0 +1,117 @@
+﻿name: Publish Packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  pack:
+    name: Pack ${{ matrix.project }}
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        project:
+          - BuildingBlocks.Domain
+          - BuildingBlocks.Application
+          - BuildingBlocks.Infrastructure
+          - BuildingBlocks.Persistence
+          - BuildingBlocks.Results
+          - BuildingBlocks.Specification
+          - BuildingBlocks.Validation
+          - BuildingBlocks.Pagination
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore BuildingBlocks.sln
+
+      - name: Pack
+        run: >
+          dotnet pack
+          src/${{ matrix.project }}/${{ matrix.project }}.csproj
+          --configuration Release
+          --no-restore
+          --output ./packages/${{ matrix.project }}
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.project }}
+          path: ./packages/${{ matrix.project }}/*.nupkg
+
+  pack-all:
+    name: Pack Reza.BuildingBlocks
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore BuildingBlocks.sln
+
+      - name: Pack complete package
+        run: >
+          dotnet pack
+          src/BuildingBlocks/BuildingBlocks.csproj
+          --configuration Release
+          --no-restore
+          --output ./packages/complete
+
+      - name: Upload complete package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Reza.BuildingBlocks
+          path: ./packages/complete/*.nupkg
+
+  publish:
+    name: Publish to GitHub Packages
+    needs:
+      - pack
+      - pack-all
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Download individual packages
+        uses: actions/download-artifact@v4
+        with:
+          path: ./packages
+          pattern: BuildingBlocks.*
+          merge-multiple: true
+
+      - name: Download complete package
+        uses: actions/download-artifact@v4
+        with:
+          name: Reza.BuildingBlocks
+          path: ./packages
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish packages
+        run: |
+          dotnet nuget push "./packages/*.nupkg" `
+            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
+            --api-key "${{ secrets.GITHUB_TOKEN }}" `
+            --skip-duplicate

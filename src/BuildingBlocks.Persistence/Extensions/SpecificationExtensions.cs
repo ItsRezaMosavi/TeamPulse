@@ -10,4 +10,11 @@ public static class SpecificationExtensions
 	{
 		return evaluator.GetQuery(query, specification);
 	}
+
+	public static IQueryable<TResult> WithSpecification<T, TResult>(this IQueryable<T> query,
+																	IQuerySpecification<T, TResult> specification,
+																	ISpecificationEvaluator evaluator) where T : class
+	{
+		return evaluator.GetQuery(query, specification);
+	}
 }

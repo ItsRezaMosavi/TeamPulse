@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>Reza.BuildingBlocks</PackageId>
+        <Description>Complete Building Blocks library for modern .NET applications</Description>
+        <PackageTags>dotnet;buildingblocks;ddd;cqrs;clean-architecture</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Application\BuildingBlocks.Application.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Persistence\BuildingBlocks.Persistence.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Results\BuildingBlocks.Results.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Specification\BuildingBlocks.Specification.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Validation\BuildingBlocks.Validation.csproj"/>
+        <ProjectReference Include="..\BuildingBlocks.Pagination\BuildingBlocks.Pagination.csproj"/>
+    </ItemGroup>
+
+</Project>

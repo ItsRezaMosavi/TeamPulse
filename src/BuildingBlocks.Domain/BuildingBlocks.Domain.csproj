@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageId>Reza.BuildingBlocks.Domain</PackageId>
+        <Description>Core domain abstractions including entities, value objects, aggregates, and domain events</Description>
+        <PackageTags>ddd;domain-driven-design;entities;value-objects;domain-events</PackageTags>
     </PropertyGroup>
-
 </Project>
