@@ -91,7 +91,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Download individual packages
+            - name: Download individual packages
         uses: actions/download-artifact@v4
         with:
           path: ./packages
@@ -104,14 +104,29 @@ jobs:
           name: Reza.BuildingBlocks
           path: ./packages
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 10.0.x
+      - name: List packages
+        shell: pwsh
+        run: |
+          Get-ChildItem -Path "./packages" -Recurse
 
       - name: Publish packages
+        shell: pwsh
         run: |
-          dotnet nuget push "./packages/*.nupkg" `
-            --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
-            --api-key "${{ secrets.GITHUB_TOKEN }}" `
-            --skip-duplicate
+          $packages = Get-ChildItem -Path "./packages" -Filter "*.nupkg" -Recurse
+
+          if ($packages.Count -eq 0) {
+              Write-Error "No NuGet packages found."
+              exit 1
+          }
+
+          Write-Host "Packages found:"
+          $packages | ForEach-Object {
+              Write-Host $_.FullName
+          }
+
+          foreach ($package in $packages) {
+              dotnet nuget push $package.FullName `
+                --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
+                --api-key "${{ secrets.GITHUB_TOKEN }}" `
+                --skip-duplicate
+          }
