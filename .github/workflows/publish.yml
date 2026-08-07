@@ -1,4 +1,4 @@
-﻿name: Publish Packages
+name: Publish Packages
 
 on:
   push:
@@ -10,6 +10,10 @@ permissions:
   packages: write
 
 jobs:
+
+  # ==========================================
+  # Pack individual packages
+  # ==========================================
   pack:
     name: Pack ${{ matrix.project }}
     runs-on: windows-latest
@@ -52,6 +56,10 @@ jobs:
           name: ${{ matrix.project }}
           path: ./packages/${{ matrix.project }}/*.nupkg
 
+
+  # ==========================================
+  # Pack complete package
+  # ==========================================
   pack-all:
     name: Pack Reza.BuildingBlocks
     runs-on: windows-latest
@@ -82,6 +90,10 @@ jobs:
           name: Reza.BuildingBlocks
           path: ./packages/complete/*.nupkg
 
+
+  # ==========================================
+  # Publish all packages to GitHub Packages
+  # ==========================================
   publish:
     name: Publish to GitHub Packages
     needs:
@@ -91,7 +103,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-            - name: Download individual packages
+      - name: Download individual packages
         uses: actions/download-artifact@v4
         with:
           path: ./packages
@@ -107,7 +119,13 @@ jobs:
       - name: List packages
         shell: pwsh
         run: |
+          Write-Host "Downloaded packages:"
           Get-ChildItem -Path "./packages" -Recurse
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
 
       - name: Publish packages
         shell: pwsh
@@ -125,6 +143,8 @@ jobs:
           }
 
           foreach ($package in $packages) {
+              Write-Host "Publishing $($package.Name)..."
+
               dotnet nuget push $package.FullName `
                 --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
                 --api-key "${{ secrets.GITHUB_TOKEN }}" `
